@@ -1,0 +1,1729 @@
+﻿{
+    "app":  {
+                "title":  "Hệ thống giám sát an ninh tập trung",
+                "logoAlt":  "LightJSC",
+                "badge":  {
+                              "console":  "Console"
+                          },
+                "apiTarget":  "API: {target}"
+            },
+    "menu":  {
+                 "dashboard":  {
+                                   "label":  "Bảng điều khiển",
+                                   "desc":  "Tổng quan và chỉ số"
+                               },
+                 "welcome":  {
+                                 "label":  "Chào mừng",
+                                 "desc":  "Đón người theo thời gian thực"
+                             },
+                 "attendance":  {
+                                   "label":  "Thống kê vào ra",
+                                   "desc":  "Tổng hợp giờ vào và giờ ra"
+                               },
+                 "sizing":  {
+                                 "label":  "Sizing hệ thống",
+                                 "desc":  "Ước lượng server, client và lưu trữ"
+                             },
+                 "faceStream":  {
+                                    "label":  "Luồng khuôn mặt",
+                                    "desc":  "Sự kiện thời gian thực"
+                                },
+                 "faceTrace":  {
+                                   "label":  "Theo vết khuôn mặt",
+                                   "desc":  "Theo dõi và tìm kiếm"
+                               },
+                 "cameras":  {
+                                 "label":  "Camera",
+                                 "desc":  "Cấu hình RTSP và thông tin"
+                             },
+                 "maps":  {
+                              "label":  "Bản đồ",
+                              "desc":  "Sơ đồ và bố trí camera"
+                          },
+                 "persons":  {
+                                 "label":  "Người",
+                                 "desc":  "Hồ sơ và đăng ký"
+                             },
+                 "subscribers":  {
+                                     "label":  "Webhook",
+                                     "desc":  "Điểm nhận thông báo"
+                                 },
+                 "settings":  {
+                                  "label":  "Cài đặt",
+                                  "desc":  "Luật gửi cảnh báo"
+                              }
+             },
+    "common":  {
+                   "language":  {
+                                    "switchTo":  {
+                                                     "vi":  "Chuyển sang tiếng Việt",
+                                                     "en":  "Chuyển sang tiếng Anh"
+                                                 }
+                                },
+                   "theme":  {
+                                 "switchToLight":  "Chuyển sang sáng",
+                                 "switchToDark":  "Chuyển sang tối"
+                             },
+                   "actions":  {
+                                   "toggleSidebar":  "Ẩn/hiện menu",
+                                   "refresh":  "Làm mới",
+                                   "create":  "Tạo",
+                                   "save":  "Lưu",
+                                   "update":  "Cập nhật",
+                                   "delete":  "Xóa",
+                                   "cancel":  "Hủy",
+                                   "edit":  "Sửa",
+                                   "apply":  "Áp dụng",
+                                   "clearSelection":  "Bỏ chọn"
+                               },
+                   "time":  {
+                                "secondsAgo":  "{n} giây trước",
+                                "minutesAgo":  "{n} phút trước",
+                                "hoursAgo":  "{n} giờ trước"
+                            },
+                   "empty":  {
+                                 "noImage":  "Chưa có ảnh"
+                             },
+                   "fields":  {
+                                  "camera":  "Camera",
+                                  "cameraIp":  "IP camera",
+                                  "time":  "Thời gian",
+                                  "zone":  "Khu vực",
+                                  "name":  "Tên",
+                                  "age":  "Tuổi",
+                                  "gender":  "Giới tính",
+                                  "mask":  "Khẩu trang",
+                                  "faces":  "Số mặt",
+                                  "similarity":  "Độ tương đồng",
+                                  "score":  "Điểm",
+                                  "trace":  "Theo vết",
+                                  "watchlist":  "Danh sách theo dõi",
+                                  "person":  "Người",
+                                  "category":  "Danh mục",
+                                  "remarks":  "Ghi chú"
+                              },
+                   "status":  {
+                                  "active":  "Hoạt động",
+                                  "known":  "Đã biết",
+                                  "unknown":  "Chưa biết",
+                                  "enabled":  "Bật",
+                                  "disabled":  "Tắt"
+                              },
+                   "states":  {
+                                  "updating":  "Đang cập nhật",
+                                  "updatedAt":  "Cập nhật lúc {time}",
+                                  "awaiting":  "Đang chờ"
+                              },
+                   "severity":  {
+                                    "critical":  "Nghiêm trọng",
+                                    "high":  "Cao",
+                                    "warn":  "Cảnh báo",
+                                    "low":  "Thấp",
+                                    "normal":  "Bình thường"
+                                },
+                   "pagination":  {
+                                      "showing":  "Hiển thị {from}-{to} / {total}",
+                                      "perPage":  "{count} / trang"
+                                  }
+               },
+    "components":  {
+                       "map":  {
+                                   "geoOnly":  "Chỉ hỗ trợ bản đồ dạng Geo cho chế độ này.",
+                                   "geoStyleMissingShort":  "Thiếu cấu hình Geo style.",
+                                   "geoStyleMissing":  "Chưa cấu hình Geo style.",
+                                   "selectMap":  "Chọn bản đồ",
+                                   "refreshMaps":  "Làm mới danh sách bản đồ",
+                                   "imageMissing":  "Chưa có ảnh",
+                                   "empty":  "Chưa có dữ liệu bản đồ",
+                                   "zoomIn":  "Phóng to",
+                                   "zoomOut":  "Thu nhỏ",
+                                   "resetView":  "Đặt lại góc nhìn"
+                               }
+                   },
+    "pages":  {
+                  "attendance":  {
+                                     "subtitle":  "Báo cáo vào ra theo tháng",
+                                     "title":  "Thống kê vào ra",
+                                     "actions":  {
+                                                     "refresh":  "Làm mới dữ liệu",
+                                                     "export":  "Xuất danh sách",
+                                                     "viewDetail":  "Xem chi tiết"
+                                                 },
+                                     "filters":  {
+                                                     "title":  "Bộ lọc thống kê",
+                                                     "month":  "Tháng",
+                                                     "year":  "Năm",
+                                                     "cameras":  "Camera",
+                                                     "camerasPlaceholder":  "Để trống để lấy tất cả camera",
+                                                     "departments":  "Đơn vị",
+                                                     "departmentsPlaceholder":  "Để trống để lấy tất cả đơn vị",
+                                                     "people":  "Nhân viên",
+                                                     "peoplePlaceholder":  "Để trống để lấy tất cả nhân viên"
+                                                 },
+                                     "tableTitle":  "Bảng tổng hợp theo ngày",
+                                     "totalRows":  "{count} người",
+                                     "states":  {
+                                                    "loading":  "Đang tải dữ liệu thống kê"
+                                                },
+                                     "columns":  {
+                                                     "index":  "STT",
+                                                     "fullName":  "Họ và tên",
+                                                     "personalId":  "Số định danh cá nhân",
+                                                     "department":  "Đơn vị",
+                                                     "dayLabel":  "Ngày {day}",
+                                                     "in":  "Giờ vào",
+                                                     "out":  "Giờ ra"
+                                                 },
+                                     "detail":  {
+                                                    "eventTitle":  "Chi tiết lần phát hiện",
+                                                    "noEvent":  "Không tìm thấy dữ liệu lần phát hiện.",
+                                                    "personTitle":  "Chi tiết nhân viên",
+                                                    "dayFilter":  "Ngày cần xem",
+                                                    "allDays":  "Cả tháng",
+                                                    "dayLabel":  "Ngày {day}",
+                                                    "monthTab":  "Cả tháng",
+                                                    "dayTab":  "Theo ngày",
+                                                    "monthEmpty":  "Chưa có lần phát hiện nào trong tháng đã chọn.",
+                                                    "dayEmpty":  "Chưa có lần phát hiện nào trong ngày đã chọn.",
+                                                    "selectDayHint":  "Chọn một ngày cụ thể để xem danh sách phát hiện của ngày đó."
+                                                },
+                                     "empty":  {
+                                                   "title":  "Chưa có dữ liệu",
+                                                   "message":  "Không có bản ghi phù hợp với bộ lọc hiện tại."
+                                               },
+                                     "export":  {
+                                                    "emptyTitle":  "Không có dữ liệu để xuất",
+                                                    "emptyMessage":  "Hãy điều chỉnh bộ lọc hoặc chờ hệ thống ghi nhận thêm dữ liệu.",
+                                                    "dayPrefix":  "Ngày"
+                                                }
+                                 },
+                 "sizing":  {
+                                 "subtitle":  "Công cụ ước tính cấu hình cho triển khai thực tế",
+                                 "title":  "Ước tính cấu hình hệ thống",
+                                 "actions":  {
+                                                 "reset":  "Khôi phục mặc định",
+                                                 "exportXlsx":  "Xuất XLSX",
+                                                 "exportCsv":  "Xuất CSV",
+                                                 "exportJson":  "Xuất JSON",
+                                                 "showAdvanced":  "Mở tùy chỉnh",
+                                                 "hideAdvanced":  "Ẩn tùy chỉnh"
+                                             },
+                                 "info":  {
+                                              "title":  "Ước tính theo tải sự kiện thực tế",
+                                              "message":  "Công cụ này bám theo mô hình xử lý sự kiện hiện tại của LightJSC: nhận metadata, so khớp trên PostgreSQL/pgvector, lưu ảnh chụp khuôn mặt và phát sự kiện thời gian thực. Nó không thay thế việc tính cấu hình riêng cho hệ xem nhiều luồng video trực tiếp trên trình duyệt."
+                                          },
+                                 "inputs":  {
+                                                "title":  "Thông số đầu vào",
+                                                "subtitle":  "Chỉ hiển thị nhóm thông số chính. Các giá trị còn lại đang dùng mặc định.",
+                                                "preset":  "Mẫu khu vực",
+                                                "siteCount":  "Số site",
+                                                "cameraCount":  "Số camera AI đang bật",
+                                                "activeHours":  "Số giờ hoạt động mỗi ngày",
+                                                "avgEventsPerMinute":  "Lượt phát hiện trung bình/phút/camera",
+                                                "peakEventsPerMinute":  "Lượt phát hiện peak/phút/camera",
+                                                "knownRatio":  "Tỷ lệ đã biết",
+                                                "webhookSubscribers":  "Số webhook nhận dữ liệu",
+                                                "personCount":  "Số người",
+                                                "templatesPerPerson":  "Số mẫu/người",
+                                                "activeTemplateRatio":  "Tỷ lệ mẫu hoạt động",
+                                                "growthPercent12m":  "Tăng trưởng 12 tháng",
+                                                "retentionDays":  "Số ngày lưu",
+                                                "avgBestshotKb":  "Dung lượng ảnh chụp khuôn mặt trung bình (KB/sự kiện)",
+                                                "avgDbKb":  "Dung lượng CSDL trung bình (KB/sự kiện)",
+                                                "avgRealtimePayloadKb":  "Dung lượng dữ liệu thời gian thực (KB/sự kiện)",
+                                                "saveKnown":  "Lưu ảnh/sự kiện đã biết",
+                                                "saveUnknown":  "Lưu ảnh/sự kiện chưa biết",
+                                                "saveThumb":  "Lưu thumbnail",
+                                                "standbyNode":  "Có máy chủ dự phòng",
+                                                "dashboardUsers":  "Người dùng bảng điều khiển",
+                                                "faceStreamUsers":  "Người dùng luồng khuôn mặt",
+                                                "welcomeUsers":  "Màn hình chào mừng",
+                                                "attendanceUsers":  "Người dùng thống kê vào ra",
+                                                "enrollmentStations":  "Máy trạm quét VNeID",
+                                                "adminUsers":  "Người dùng quản trị/báo cáo",
+                                                "liveVideoOperators":  "Người dùng xem video trực tiếp tương lai",
+                                                "futureLiveView":  "Dự kiến có video trực tiếp trên web",
+                                                "advancedHint":  "Thông số custom đang ẩn và dùng giá trị mặc định. Chỉ mở khi cần tinh chỉnh."
+                                            },
+                                 "sections":  {
+                                                  "workload":  "Tải sự kiện",
+                                                  "watchlist":  "Danh sách theo dõi và tăng trưởng",
+                                                  "storage":  "Lưu trữ",
+                                                  "webUsers":  "Người dùng web"
+                                              },
+                                 "presets":  {
+                                                 "office":  { "label":  "Văn phòng" },
+                                                 "lobby":  { "label":  "Sảnh / lễ tân" },
+                                                 "gate":  { "label":  "Cổng kiểm soát" },
+                                                 "factory":  { "label":  "Nhà máy / xưởng" },
+                                                 "school":  { "label":  "Trường học" },
+                                                 "retail":  { "label":  "Bán lẻ / showroom" }
+                                             },
+                                 "kpis":  {
+                                              "peakEps":  "EPS cực đại",
+                                              "avgEpsCaption":  "EPS trung bình: {value}",
+                                              "eventsPerDay":  "Sự kiện mỗi ngày",
+                                              "storedEventsCaption":  "Sự kiện lưu/ngày: {value}",
+                                              "storage":  "Dung lượng lưu trữ",
+                                              "storageCaption":  "Tổng tăng trưởng/ngày: {value} GB",
+                                              "realtime":  "Dữ liệu thời gian thực",
+                                              "realtimeCaption":  "Số người dùng thời gian thực: {users}"
+                                          },
+                                 "tiers":  {
+                                               "pilot":  { "label":  "Thử nghiệm" },
+                                               "standard":  { "label":  "Tiêu chuẩn" },
+                                               "large":  { "label":  "Quy mô lớn" },
+                                               "enterprise":  { "label":  "Rất lớn" }
+                                           },
+                                 "architectures":  {
+                                                       "allInOne":  {
+                                                                        "label":  "Một máy",
+                                                                        "title":  "Một máy chạy toàn bộ",
+                                                                        "description":  "Phù hợp giai đoạn thử nghiệm hoặc site nhỏ, tải sự kiện thấp và số ngày lưu vừa phải."
+                                                                    },
+                                                       "splitDatabase":  {
+                                                                              "label":  "Tách cơ sở dữ liệu",
+                                                                              "title":  "Tách PostgreSQL/pgvector riêng",
+                                                                              "description":  "Phù hợp đa số triển khai thực tế vì Postgres là bottleneck chính của matching và lưu sự kiện."
+                                                                          },
+                                                       "splitRealtime":  {
+                                                                              "label":  "Tách thời gian thực và webhook",
+                                                                              "title":  "Tách máy chủ thời gian thực và webhook",
+                                                                              "description":  "Dùng khi có nhiều màn hình chào mừng, luồng khuôn mặt hoặc nhiều webhook để tránh ảnh hưởng node lõi."
+                                                                          },
+                                                       "requiresArchitectureV2":  {
+                                                                                     "label":  "Cần kiến trúc V2",
+                                                                                     "title":  "Cần đánh giá lại kiến trúc",
+                                                                                     "description":  "Quy mô này vượt vùng an toàn của kiến trúc nhận dữ liệu một node active hiện tại. Nên tính đến phương án chia camera, dùng hàng đợi trung tâm và tách riêng các dịch vụ xử lý."
+                                                                                 }
+                                                   },
+                                 "warnings":  {
+                                                  "singleActiveNode":  {
+                                                                           "title":  "Node lõi hiện tại nên chạy single active",
+                                                                           "message":  "Kiến trúc hiện tại không phù hợp chạy ingest song song nhiều node nếu chưa có cơ chế phân chia camera."
+                                                                       },
+                                                  "splitDatabaseRecommended":  {
+                                                                                    "title":  "Nên tách PostgreSQL ra riêng",
+                                                                                    "message":  "Khi số camera, EPS cực đại hoặc danh sách theo dõi tăng, pgvector và ghi sự kiện sẽ là điểm nghẽn trước tiên."
+                                                                                },
+                                                  "splitRealtimeRecommended":  {
+                                                                                    "title":  "Nên tách thời gian thực và webhook",
+                                                                                    "message":  "Số người dùng thời gian thực hoặc số webhook lớn có thể làm tăng băng thông ra và áp lực hàng đợi trên node lõi."
+                                                                                },
+                                                  "standbyRecommended":  {
+                                                                             "title":  "Nên có máy chủ dự phòng",
+                                                                             "message":  "Quy mô hiện tại đã đủ lớn để cần phương án dự phòng nóng hoặc ấm cho máy chủ nhận dữ liệu chính."
+                                                                         },
+                                                  "httpsRequiredForEnrollment":  {
+                                                                                    "title":  "Các trạm scan local cần HTTPS",
+                                                                                    "message":  "Nếu dùng USB camera trên browser cho Scan VNeID, site phải chạy HTTPS hoặc secure origin tương đương."
+                                                                                },
+                                                  "retentionHigh":  {
+                                                                         "title":  "Số ngày lưu khá dài",
+                                                                         "message":  "Số ngày lưu cao làm tăng nhanh dung lượng lưu ảnh chụp khuôn mặt và PostgreSQL. Nên kiểm tra phương án lưu trữ dài hạn hoặc chính sách dọn dữ liệu."
+                                                                     },
+                                                  "storageHigh":  {
+                                                                       "title":  "Dung lượng lưu trữ lớn",
+                                                                       "message":  "Nên tách riêng vùng lưu dữ liệu, WAL và ảnh chụp khuôn mặt; ưu tiên SSD enterprise chịu ghi tốt."
+                                                                   },
+                                                  "eventRateHigh":  {
+                                                                         "title":  "EPS cực đại cao",
+                                                                         "message":  "Tải sự kiện cao có thể làm hàng đợi nhận dữ liệu và webhook tăng mạnh, dẫn tới rơi sự kiện nếu không nâng cấp kiến trúc hoặc phần cứng."
+                                                                     },
+                                                  "architectureLimit":  {
+                                                                            "title":  "Đã chạm giới hạn kiến trúc hiện tại",
+                                                                            "message":  "Nên lên phương án V2 với camera sharding, queue trung tâm và worker matching/webhook tách khỏi web/API."
+                                                                        },
+                                                  "watchlistLarge":  {
+                                                                         "title":  "Watchlist rất lớn",
+                                                                         "message":  "Số template active cao làm tăng yêu cầu RAM/cache và thời gian build/index HNSW trên PostgreSQL."
+                                                                     },
+                                                  "liveViewNeedsSeparateSizing":  {
+                                                                                    "title":  "Video trực tiếp cần tính cấu hình riêng",
+                                                                                    "message":  "Nếu sau này xem nhiều luồng video trực tiếp trên trình duyệt, phải tính riêng theo codec, fps, layout và khả năng giải mã của máy trạm."
+                                                                                }
+                                              },
+                                 "notes":  {
+                                               "allInOne":  "Chạy chung ứng dụng, xử lý nền và cơ sở dữ liệu",
+                                               "metadataOnly":  "Tối ưu cho metadata, không giải mã toàn bộ video",
+                                               "activeCore":  "Node lõi active",
+                                               "singleActiveOnly":  "Không nên chạy ingest song song nhiều node",
+                                               "pgvectorHeavy":  "Tải nặng ở pgvector",
+                                               "nvmeRequired":  "Ưu tiên NVMe enterprise",
+                                               "signalrWebhook":  "Tách SignalR và webhook",
+                                               "optionalForIsolation":  "Tùy chọn để cô lập luồng thời gian thực",
+                                               "warmStandby":  "Dự phòng nóng/ấm",
+                                               "doNotRunActiveActive":  "Không chạy song song nhiều node",
+                                               "eventUi":  "Chủ yếu xem sự kiện, biểu đồ, bản đồ",
+                                               "fhdRecommended":  "Khuyến nghị màn FHD",
+                                               "kioskMode":  "Dùng cho kiosk chào mừng",
+                                               "wiredLan":  "Ưu tiên mạng dây",
+                                               "usbCamera":  "Dùng camera USB/local",
+                                               "httpsRequired":  "Yêu cầu HTTPS",
+                                               "reportsTrace":  "Phù hợp báo cáo, truy vết",
+                                               "exportWorkloads":  "Có tải export dữ liệu",
+                                               "browserDecode":  "Cần trình duyệt giải mã mạnh",
+                                               "separateAssessment":  "Nên đánh giá video trực tiếp riêng"
+                                           },
+                                 "results":  {
+                                                 "summary":  {
+                                                                 "subtitle":  "Kết luận kiến trúc",
+                                                                 "title":  "Phương án đề xuất",
+                                                                 "current":  "Thông số hiện tại",
+                                                                 "cameraCount":  "Số camera",
+                                                                 "activeTemplates":  "Mẫu hoạt động",
+                                                                 "recommendedNic":  "Card mạng khuyến nghị",
+                                                                 "ingest":  "Băng thông nhận dữ liệu",
+                                                                 "projection12m":  "Dự phóng 12 tháng",
+                                                                 "tier":  "Mức cấu hình"
+                                                             },
+                                                 "warnings":  {
+                                                                  "subtitle":  "Rủi ro và lưu ý",
+                                                                  "title":  "Cảnh báo triển khai"
+                                                              },
+                                                 "server":  {
+                                                                "subtitle":  "Phần cứng máy chủ",
+                                                                "title":  "Khuyến nghị máy chủ",
+                                                                "columns":  {
+                                                                                "role":  "Vai trò",
+                                                                                "count":  "SL",
+                                                                                "cpu":  "Số lõi CPU",
+                                                                                "ram":  "RAM",
+                                                                                "storage":  "Lưu trữ",
+                                                                                "notes":  "Ghi chú"
+                                                                            },
+                                                                "storageParts":  {
+                                                                                      "system":  "HĐH/Ứng dụng",
+                                                                                      "data":  "Dữ liệu",
+                                                                                      "bestshot":  "Ảnh chụp",
+                                                                                      "database":  "CSDL",
+                                                                                      "mixed":  "Ảnh chụp + CSDL"
+                                                                                  },
+                                                                "roles":  {
+                                                                              "app":  "Máy chủ dịch vụ",
+                                                                              "database":  "Máy chủ PostgreSQL/pgvector",
+                                                                              "realtime":  "Máy chủ thời gian thực/webhook",
+                                                                              "standby":  "Dự phòng"
+                                                                          }
+                                                            },
+                                                 "clients":  {
+                                                                 "subtitle":  "Thiết bị máy trạm",
+                                                                "title":  "Máy trạm",
+                                                                 "columns":  {
+                                                                                 "role":  "Vai trò",
+                                                                                 "count":  "SL",
+                                                                                 "cpu":  "CPU",
+                                                                                 "ram":  "RAM",
+                                                                                 "storage":  "Lưu trữ",
+                                                                                 "notes":  "Ghi chú"
+                                                                             },
+                                                                 "roles":  {
+                                                                               "operator":  "Máy trạm chuẩn",
+                                                                               "welcome":  "Kiosk chào mừng",
+                                                                               "enrollment":  "Máy trạm quét VNeID",
+                                                                               "admin":  "Máy trạm quản trị/báo cáo",
+                                                                               "video":  "Máy trạm video trực tiếp"
+                                                                           }
+                                                             },
+                                                 "network":  {
+                                                                 "subtitle":  "Mạng và realtime",
+                                                                 "title":  "Ước lượng băng thông",
+                                                                 "ingest":  "Camera ingest",
+                                                                 "ingestCaption":  "Ước lượng metadata + bestshot từ camera về node lõi.",
+                                                                 "realtime":  "Web realtime egress",
+                                                                 "realtimeCaption":  "Tính cho {count} user Welcome/Face Stream đồng thời."
+                                                             },
+                                                 "bom":  {
+                                                             "subtitle":  "Danh mục gợi ý",
+                                                             "title":  "BOM sơ bộ",
+                                                             "columns":  {
+                                                                             "item":  "Hạng mục",
+                                                                             "quantity":  "SL",
+                                                                             "spec":  "Cấu hình"
+                                                                         }
+                                                         }
+                                             },
+                                "export":  {
+                                               "sheetName":  "Cấu hình",
+                                               "columns":  {
+                                                               "index":  "Stt",
+                                                               "system":  "Hệ thống",
+                                                               "quantity":  "Số lượng",
+                                                               "cpu":  "CPU",
+                                                               "ram":  "RAM",
+                                                               "storage":  "Lưu trữ",
+                                                               "notes":  "Ghi chú"
+                                                           },
+                                               "system":  {
+                                                              "server":  "Máy chủ dịch vụ",
+                                                              "workstation":  "Máy trạm"
+                                                          },
+                                               "notes":  {
+                                                             "clientSummary":  "Cấu hình lấy theo mức cao nhất trong các nhóm máy trạm. Tổng số lượng: {count}.",
+                                                             "noClient":  "Chưa phát sinh nhu cầu máy trạm."
+                                                         }
+                                           },
+                                 "notifications":  {
+                                                       "reset":  {
+                                                                     "title":  "Đã khôi phục mặc định",
+                                                                     "message":  "Tool sizing đã trở về bộ thông số mặc định."
+                                                                 },
+                                                       "exportXlsxFailed":  {
+                                                                                "title":  "Xuất XLSX thất bại",
+                                                                                "message":  "Không thể tạo file XLSX."
+                                                                 }
+                                                   }
+                             },
+                 "welcome":  {
+                                  "subtitle":  "Màn hình đón người theo camera AI",
+                                  "title":  "Chào mừng",
+                                  "actions":  {
+                                                  "refresh":  "Làm mới dữ liệu"
+                                              },
+                                  "status":  {
+                                                 "connecting":  "Đang kết nối",
+                                                 "live":  "Đang trực tuyến",
+                                                 "reconnecting":  "Đang kết nối lại",
+                                                 "disconnected":  "Mất kết nối",
+                                                 "failed":  "Lỗi kết nối"
+                                             },
+                                  "states":  {
+                                                 "loading":  "Đang tải dữ liệu hôm nay"
+                                             },
+                                  "camera":  {
+                                                 "placeholder":  "Chọn camera AI",
+                                                 "none":  "Chưa chọn camera",
+                                                 "emptyTitle":  "Chưa có camera khả dụng",
+                                                 "emptyMessage":  "Hãy bật ít nhất một camera AI trong hệ thống để sử dụng màn hình chào mừng."
+                                             },
+                                  "stats":  {
+                                                "uniqueToday":  "Người đã tới hôm nay",
+                                                "greetingsToday":  "Lượt chào hôm nay",
+                                                "liveStatus":  "Trạng thái realtime"
+                                            },
+                                  "hero":  {
+                                               "subtitle":  "Vùng hiển thị chào mừng",
+                                               "badge":  "WELCOME",
+                                               "description":  "Thông tin người vừa được nhận diện sẽ xuất hiện nổi bật tại đây để phục vụ đón tiếp trực quan."
+                                           },
+                                  "fields":  {
+                                                 "personalId":  "Số định danh cá nhân",
+                                                 "department":  "Bộ phận"
+                                             },
+                                  "gender":  {
+                                                 "male":  "Nam",
+                                                 "female":  "Nữ"
+                                             },
+                                  "recent":  {
+                                                 "subtitle":  "Danh sách cập nhật",
+                                                 "title":  "Người đã tới gần nhất",
+                                                 "emptyTitle":  "Chưa có dữ liệu chào mừng",
+                                                 "emptyMessage":  "Khi camera đã chọn nhận diện được người đã đăng ký, danh sách này sẽ tự cập nhật."
+                                             },
+                                  "summary":  {
+                                                  "label":  "Tổng số người đã tới trong ngày hiện tại",
+                                                  "caption":  "Lượt chào đã ghi nhận: {count}"
+                                              },
+                                  "empty":  {
+                                                "title":  "Đang chờ người tiếp theo",
+                                                "message":  "Chọn camera bên trên. Khi hệ thống nhận diện được người đã đăng ký, phần chào mừng sẽ xuất hiện ngay tại đây."
+                                            },
+                                  "greetings":  {
+                                                    "morning":  "Chào buổi sáng",
+                                                    "afternoon":  "Chào mừng",
+                                                    "evening":  "Chúc buổi tối tốt lành"
+                                                },
+                                  "errors":  {
+                                                 "connectFailed":  "Không thể kết nối luồng realtime.",
+                                                 "loadSnapshot":  "Không thể tải dữ liệu nhận diện gần nhất."
+                                             },
+                                  "subscriberTarget":  "Nguồn realtime: {target}"
+                              },
+                  "dashboard":  {
+                                    "subtitle":  "Tổng quan và chỉ số nhanh",
+                                    "title":  "Bảng điều khiển",
+                                    "actions":  {
+                                                    "refreshNow":  "Làm mới ngay",
+                                                    "autoRefresh":  "Tự động làm mới",
+                                                    "scheduled":  "Làm mới lúc {time}"
+                                                },
+                                    "throughput":  {
+                                                       "subtitle":  "Thông lượng thời gian thực",
+                                                       "title":  "Sự kiện theo thời gian",
+                                                       "axis":  {
+                                                                    "time":  "Thời gian",
+                                                                    "events":  "Sự kiện"
+                                                                },
+                                                       "legend":  {
+                                                                      "known":  "Đã biết",
+                                                                      "unknown":  "Chưa biết",
+                                                                      "match":  "Khớp",
+                                                                      "total":  "Tổng"
+                                                                  }
+                                                   },
+                                    "topCameras":  {
+                                                       "subtitle":  "Top camera",
+                                                       "title":  "Hoạt động cao nhất"
+                                                   },
+                                    "alerts":  {
+                                                   "subtitle":  "Cảnh báo \u0026 xử lý",
+                                                   "title":  "Phát hiện gần đây",
+                                                   "empty":  "Không có cảnh báo trong khoảng thời gian này.",
+                                                   "knownPerson":  "Người đã biết",
+                                                   "unknown":  "Chưa xác định",
+                                                   "eventAt":  "{label} · {time}"
+                                               },
+                                    "cards":  {
+                                                  "totalEvents":  "Tổng sự kiện",
+                                                  "watchlistMatches":  "Khớp watchlist",
+                                                  "unknownFaces":  "Khuôn mặt lạ",
+                                                  "knownFaces":  "Khuôn mặt đã biết",
+                                                  "enabledCameras":  "Camera bật",
+                                                  "offlineCameras":  "Camera offline",
+                                                  "activeCameras":  "Camera hoạt động",
+                                                  "webhookFails":  "Webhook lỗi"
+                                              },
+                                    "systemHealth":  {
+                                                         "subtitle":  "Sức khỏe hệ thống",
+                                                         "title":  "Sức khỏe hệ thống",
+                                                         "badges":  {
+                                                                        "offline":  "{count} mất kết nối",
+                                                                        "warn":  "{count} cảnh báo",
+                                                                        "disabled":  "{count} tắt"
+                                                                    },
+                                                         "queueDepth":  "Độ sâu hàng đợi",
+                                                         "ingest":  "Ingest",
+                                                         "webhook":  "Webhook",
+                                                         "dropReasons":  "Lý do drop",
+                                                         "noDrops":  "Không có drop trong khoảng thời gian này.",
+                                                         "latency":  "Độ trễ",
+                                                         "matchP95":  "Match p95 (giây)",
+                                                         "webhookSuccess":  "Webhook thành công",
+                                                         "webhookFail":  "Webhook thất bại"
+                                                     }
+                                },
+                  "faceStream":  {
+                                     "subtitle":  "Sự kiện thời gian thực",
+                                     "title":  "Luồng khuôn mặt",
+                                     "connection":  {
+                                                        "connecting":  "Đang kết nối",
+                                                        "live":  "Trực tuyến",
+                                                        "reconnecting":  "Đang kết nối lại",
+                                                        "disconnected":  "Mất kết nối",
+                                                        "failed":  "Kết nối thất bại"
+                                                    },
+                                     "subscriberTarget":  "Đích nhận: {target}",
+                                     "tabs":  {
+                                                  "stream":  "Luồng",
+                                                  "map":  "Bản đồ"
+                                              },
+                                     "known":  {
+                                                   "subtitle":  "Đã nhận diện",
+                                                   "title":  "Khuôn mặt đã biết",
+                                                   "empty":  "Chưa có khuôn mặt đã biết."
+                                               },
+                                     "unknown":  {
+                                                     "subtitle":  "Chưa nhận diện",
+                                                     "title":  "Khuôn mặt chưa biết",
+                                                     "empty":  "Chưa có khuôn mặt chưa biết."
+                                                 },
+                                     "actions":  {
+                                                     "trackOnMap":  "Theo vết trên bản đồ",
+                                                     "createPerson":  "Tạo người"
+                                                 },
+                                  "validation":  {
+                                                      "codeRequired":  "Mã là bắt buộc.",
+                                                      "firstNameRequired":  "Tên là bắt buộc.",
+                                                      "lastNameRequired":  "Họ là bắt buộc.",
+                                                      "fullNameRequired":  "Họ và tên là bắt buộc.",
+                                                      "personalIdRequired":  "Số định danh cá nhân là bắt buộc.",
+                                                      "cameraRequired":  "Camera là bắt buộc.",
+                                                      "faceImageRequired":  "Ảnh khuôn mặt là bắt buộc."
+                                                  },
+                                     "crop":  {
+                                                  "selectArea":  "Vui lòng chọn vùng cắt trước.",
+                                                  "failed":  "Cắt ảnh thất bại."
+                                              },
+                                     "errors":  {
+                                                    "loadSnapshot":  "Không thể tải dữ liệu mới nhất.",
+                                                    "connectFailed":  "Không thể kết nối luồng."
+                                                },
+                                     "notifications":  {
+                                                           "personCreated":  {
+                                                                                 "title":  "Đã tạo người",
+                                                                                 "message":  "Tạo hồ sơ thành công.",
+                                                                                 "retry":  "{message} Vui lòng dùng Đăng ký để thử lại."
+                                                                             },
+                                                           "personCreatedEnrolled":  {
+                                                                                         "title":  "Đã tạo người và đăng ký",
+                                                                                         "message":  "Đã lưu mẫu khuôn mặt."
+                                                                                     },
+                                                           "createFailed":  {
+                                                                                "title":  "Tạo thất bại"
+                                                                            },
+                                                           "faceImageError":  {
+                                                                                  "title":  "Lỗi ảnh khuôn mặt",
+                                                                                  "message":  "Không thể xử lý ảnh khuôn mặt."
+                                                                              },
+                                                           "enrollFailed":  {
+                                                                                "title":  "Đăng ký thất bại",
+                                                                                "message":  "Không thể đăng ký khuôn mặt."
+                                                                            }
+                                                       },
+                                  "form":  {
+                                                "code":  "Mã",
+                                                "category":  "Danh mục",
+                                                  "listType":  {
+                                                                   "label":  "Loại danh sách",
+                                                                   "placeholder":  "Chọn loại",
+                                                                   "protect":  "Bảo vệ (không thuộc danh sách)",
+                                                                   "white":  "Danh sách trắng",
+                                                                   "black":  "Danh sách đen"
+                                                               },
+                                                  "firstName":  "Tên",
+                                                  "lastName":  "Họ",
+                                                  "gender":  "Giới tính",
+                                                  "age":  "Tuổi",
+                                                  "remarks":  "Ghi chú",
+                                                  "placeholders":  {
+                                                                       "code":  "E001",
+                                                                       "category":  "Nhân sự",
+                                                                       "firstName":  "Nguyễn",
+                                                                       "lastName":  "An",
+                                                                       "gender":  "Nam",
+                                                                       "age":  "30",
+                                                                       "remarks":  "Ghi chú thêm"
+                                                                   }
+                                              },
+                                     "enroll":  {
+                                                    "title":  "Đăng ký khuôn mặt ngay",
+                                                    "subtitle":  "Tải ảnh khuôn mặt để đăng ký ngay.",
+                                                    "noCamera":  "Thêm camera trước khi đăng ký.",
+                                                    "camera":  "Camera",
+                                                    "cameraPlaceholder":  "Chọn camera",
+                                                    "noCameras":  "Không có camera",
+                                                    "faceImage":  "Ảnh khuôn mặt (JPEG)",
+                                                    "faceImagePlaceholder":  "Chọn ảnh",
+                                                    "cropTitle":  "Cắt khuôn mặt",
+                                                    "zoom":  "Thu phóng",
+                                                    "useOriginal":  "Dùng ảnh gốc",
+                                                    "croppedAlt":  "Khuôn mặt đã cắt",
+                                                    "sourceCamera":  "Mã camera nguồn (tùy chọn)",
+                                                    "sourceCameraPlaceholder":  "Mã camera",
+                                                    "storeFaceImage":  "Lưu ảnh khuôn mặt cùng template"
+                                                },
+                                     "modals":  {
+                                                    "addPerson":  {
+                                                                      "title":  "Thêm người"
+                                                                  }
+                                                },
+                                     "map":  {
+                                                 "errors":  {
+                                                                "loadFailed":  "Không thể tải trace trên bản đồ."
+                                                            },
+                                                 "empty":  {
+                                                               "title":  "Chọn khuôn mặt để theo vết",
+                                                               "subtitle":  "Chọn một sự kiện để bắt đầu theo dõi trên bản đồ."
+                                                           },
+                                                 "header":  {
+                                                                "subtitle":  "Theo vết realtime trên bản đồ",
+                                                                "atCamera":  "{time} • {camera}"
+                                                            },
+                                                 "emptyResults":  "Không có điểm theo vết trong 5 phút gần nhất."
+                                             }
+                                 },
+                  "faceTrace":  {
+                                    "subtitle":  "Theo dõi và tìm kiếm",
+                                    "title":  "Theo vết khuôn mặt",
+                                    "tabs":  {
+                                                 "events":  "Sự kiện",
+                                                 "map":  "Bản đồ"
+                                             },
+                                    "badges":  {
+                                                   "search":  "Tìm kiếm",
+                                                   "trace":  "Theo vết"
+                                               },
+                                    "filters":  {
+                                                    "timeAndCameras":  "Thời gian \u0026 camera",
+                                                    "toggleTimeAndCameras":  "Ẩn/hiện thời gian \u0026 camera",
+                                                    "from":  "Từ",
+                                                    "to":  "Đến",
+                                                    "allCameras":  "Tất cả camera",
+                                                    "cameras":  "Camera",
+                                                    "selectCameras":  "Chọn camera",
+                                                    "searchTitle":  "Bộ lọc tìm kiếm",
+                                                    "toggleSearch":  "Ẩn/hiện bộ lọc",
+                                                    "target":  "Đối tượng",
+                                                    "targets":  {
+                                                                    "all":  "Tất cả",
+                                                                    "known":  "Đã biết",
+                                                                    "unknown":  "Chưa biết",
+                                                                    "whitelist":  "Danh sách trắng",
+                                                                    "blacklist":  "Danh sách đen",
+                                                                    "protect":  "Bảo vệ",
+                                                                    "undefined":  "Không xác định"
+                                                                },
+                                                    "gender":  {
+                                                                   "label":  "Giới tính",
+                                                                   "all":  "Tất cả",
+                                                                   "male":  "Nam",
+                                                                   "female":  "Nữ"
+                                                               },
+                                                    "mask":  {
+                                                                 "label":  "Khẩu trang",
+                                                                 "all":  "Tất cả",
+                                                                 "masked":  "Có khẩu trang",
+                                                                 "unmasked":  "Không khẩu trang"
+                                                             },
+                                                    "ageMin":  "Tuổi nhỏ nhất",
+                                                    "ageMax":  "Tuổi lớn nhất",
+                                                    "scoreMin":  "Điểm tối thiểu",
+                                                    "similarityMin":  "Độ tương đồng tối thiểu",
+                                                    "personSearch":  "Tìm người",
+                                                    "personSearchPlaceholder":  "Tìm theo tên hoặc mã",
+                                                    "category":  "Danh mục",
+                                                    "categoryPlaceholder":  "Lọc theo danh mục",
+                                                    "hasFeature":  "Chỉ sự kiện có đặc trưng",
+                                                    "pageSize":  "Kích thước trang"
+                                                },
+                                    "actions":  {
+                                                    "search":  "Tìm kiếm",
+                                                    "traceFromEvent":  "Theo vết từ sự kiện",
+                                                    "viewOnMap":  "Xem trên bản đồ",
+                                                    "createPerson":  "Tạo người"
+                                                },
+                                    "validation":  {
+                                                       "codeRequired":  "Mã là bắt buộc.",
+                                                       "firstNameRequired":  "Tên là bắt buộc.",
+                                                       "lastNameRequired":  "Họ là bắt buộc.",
+                                                       "cameraRequired":  "Camera là bắt buộc.",
+                                                       "faceImageRequired":  "Ảnh khuôn mặt là bắt buộc."
+                                                   },
+                                    "crop":  {
+                                                 "selectArea":  "Vui lòng chọn vùng cắt trước.",
+                                                 "failed":  "Cắt ảnh thất bại."
+                                             },
+                                    "notifications":  {
+                                                          "searchFailed":  {
+                                                                               "title":  "Tìm kiếm thất bại",
+                                                                               "message":  "Không thể tải kết quả tìm kiếm."
+                                                                           },
+                                                          "selectPerson":  {
+                                                                               "title":  "Chọn người",
+                                                                               "message":  "Chọn một người để theo vết."
+                                                                           },
+                                                          "traceFailed":  {
+                                                                              "title":  "Theo vết thất bại",
+                                                                              "person":  "Không thể theo vết người.",
+                                                                              "image":  "Không thể theo vết bằng ảnh.",
+                                                                              "event":  "Không thể theo vết sự kiện."
+                                                                          },
+                                                          "uploadImage":  {
+                                                                              "title":  "Tải ảnh",
+                                                                              "message":  "Chọn ảnh khuôn mặt để theo vết."
+                                                                          },
+                                                          "personCreated":  {
+                                                                                "title":  "Đã tạo người",
+                                                                                "message":  "Tạo hồ sơ thành công.",
+                                                                                "retry":  "{message} Vui lòng dùng Đăng ký để thử lại."
+                                                                            },
+                                                          "personCreatedEnrolled":  {
+                                                                                        "title":  "Đã tạo người và đăng ký",
+                                                                                        "message":  "Đã lưu mẫu khuôn mặt."
+                                                                                    },
+                                                          "createFailed":  {
+                                                                               "title":  "Tạo thất bại"
+                                                                           },
+                                                          "faceImageError":  {
+                                                                                 "title":  "Lỗi ảnh khuôn mặt",
+                                                                                 "message":  "Không thể xử lý ảnh khuôn mặt."
+                                                                             },
+                                                          "enrollFailed":  {
+                                                                               "title":  "Đăng ký thất bại",
+                                                                               "message":  "Không thể đăng ký khuôn mặt."
+                                                                           }
+                                                      },
+                                    "traceActions":  {
+                                                         "title":  "Hành động theo vết",
+                                                         "toggle":  "Ẩn/hiện hành động theo vết",
+                                                         "similarity":  {
+                                                                            "label":  "Ngưỡng tương đồng",
+                                                                            "desc":  "Cao hơn = khớp chặt hơn"
+                                                                        },
+                                                         "source":  {
+                                                                        "label":  "Nguồn theo vết",
+                                                                        "person":  "Người",
+                                                                        "image":  "Ảnh"
+                                                                    },
+                                                         "person":  {
+                                                                        "label":  "Theo vết theo người",
+                                                                        "placeholder":  "Chọn người"
+                                                                    },
+                                                         "image":  {
+                                                                       "label":  "Tải ảnh",
+                                                                       "placeholder":  "Chọn ảnh khuôn mặt"
+                                                                   },
+                                                         "crop":  {
+                                                                      "title":  "Cắt khuôn mặt",
+                                                                      "zoom":  "Thu phóng",
+                                                                      "useOriginal":  "Dùng ảnh gốc",
+                                                                      "alt":  "Khuôn mặt đã cắt"
+                                                                  },
+                                                         "run":  {
+                                                                     "person":  "Theo vết người",
+                                                                     "image":  "Theo vết ảnh"
+                                                                 },
+                                                         "detect":  {
+                                                                        "action":  "Phát hiện khuôn mặt",
+                                                                        "faceAlt":  "Khuôn mặt được phát hiện",
+                                                                        "noFace":  "Không phát hiện khuôn mặt.",
+                                                                        "noImage":  "Vui lòng chọn ảnh trước khi phát hiện.",
+                                                                        "selected":  "Đã chọn khuôn mặt",
+                                                                        "results":  "Kết quả phát hiện",
+                                                                        "failed":  "Không thể phát hiện khuôn mặt."
+                                                                    }
+                                                     },
+                                    "results":  {
+                                                    "subtitle":  {
+                                                                     "search":  "Sự kiện lọc từ lưu trữ",
+                                                                     "trace":  "Kết quả theo vết theo độ tương đồng"
+                                                                 },
+                                                    "title":  "Kết quả",
+                                                    "loading":  "Đang tải",
+                                                    "empty":  "Chưa có kết quả. Hãy lọc hoặc chạy theo vết."
+                                                },
+                                    "form":  {
+                                                 "code":  "Mã",
+                                                 "category":  "Danh mục",
+                                                 "listType":  {
+                                                                  "label":  "Loại danh sách",
+                                                                  "placeholder":  "Chọn loại",
+                                                                  "protect":  "Bảo vệ (không thuộc danh sách)",
+                                                                  "white":  "Danh sách trắng",
+                                                                  "black":  "Danh sách đen"
+                                                              },
+                                                 "firstName":  "Tên",
+                                                 "lastName":  "Họ",
+                                                 "gender":  "Giới tính",
+                                                 "age":  "Tuổi",
+                                                 "remarks":  "Ghi chú",
+                                                 "placeholders":  {
+                                                                      "code":  "E001",
+                                                                      "category":  "Nhân sự",
+                                                                      "firstName":  "Nguyễn",
+                                                                      "lastName":  "An",
+                                                                      "gender":  "Nam",
+                                                                      "age":  "30",
+                                                                      "remarks":  "Ghi chú thêm"
+                                                                  }
+                                             },
+                                    "enroll":  {
+                                                   "title":  "Đăng ký khuôn mặt ngay",
+                                                   "subtitle":  "Tải ảnh khuôn mặt để đăng ký ngay.",
+                                                   "noCamera":  "Thêm camera trước khi đăng ký.",
+                                                   "camera":  "Camera",
+                                                   "cameraPlaceholder":  "Chọn camera",
+                                                   "noCameras":  "Không có camera",
+                                                   "faceImage":  "Ảnh khuôn mặt (JPEG)",
+                                                   "faceImagePlaceholder":  "Chọn ảnh",
+                                                   "cropTitle":  "Cắt khuôn mặt",
+                                                   "zoom":  "Thu phóng",
+                                                   "useOriginal":  "Dùng ảnh gốc",
+                                                   "croppedAlt":  "Khuôn mặt đã cắt",
+                                                   "sourceCamera":  "Mã camera nguồn (tùy chọn)",
+                                                   "sourceCameraPlaceholder":  "Mã camera",
+                                                   "storeFaceImage":  "Lưu ảnh khuôn mặt cùng template"
+                                               },
+                                    "modals":  {
+                                                   "addPerson":  {
+                                                                     "title":  "Thêm người"
+                                                                 }
+                                               }
+                                },
+                  "maps":  {
+                               "subtitle":  "Tạo bản đồ và đặt camera để theo dõi.",
+                               "title":  "Bố cục bản đồ",
+                               "badges":  {
+                                              "unsaved":  "Chưa lưu"
+                                          },
+                               "actions":  {
+                                               "newMap":  "Tạo bản đồ",
+                                               "savePositions":  "Lưu vị trí"
+                                           },
+                               "sidebar":  {
+                                               "mapsTitle":  "Bản đồ",
+                                               "searchMapPlaceholder":  "Tìm theo tên bản đồ",
+                                               "emptyMaps":  "Chưa có bản đồ. Hãy tạo mới để bắt đầu.",
+                                               "camerasTitle":  "Camera",
+                                               "camerasHint":  "Kéo camera vào bản đồ hoặc bấm để chọn vị trí trên bản đồ Geo.",
+                                               "searchCameraPlaceholder":  "Tìm theo mã hoặc IP",
+                                               "unnamedCamera":  "Camera chưa đặt tên",
+                                               "cameraIp":  "IP: {ip}",
+                                               "badges":  {
+                                                              "placed":  "Đã đặt"
+                                                          }
+                                           },
+                               "panel":  {
+                                             "geoHint":  "Chọn camera rồi bấm lên bản đồ để đặt vị trí.",
+                                             "imageHint":  "Bản đồ ảnh với kéo thả.",
+                                             "noMapSelected":  "Chưa chọn bản đồ",
+                                             "uploadImage":  "Tải ảnh bản đồ",
+                                             "mapAlt":  "bản đồ"
+                                         },
+                               "geo":  {
+                                           "missingStyle":  "Thiết lập Map:GeoStyleUrl trong appsettings để bật bản đồ Geo."
+                                       },
+                               "empty":  "Chọn hoặc tạo bản đồ để bắt đầu đặt camera.",
+                               "fields":  {
+                                              "name":  "Tên",
+                                              "type":  "Loại",
+                                              "parent":  "Bản đồ cha"
+                                          },
+                               "placeholders":  {
+                                                    "mapName":  "Tầng 1",
+                                                    "rootMap":  "Bản đồ gốc"
+                                                },
+                               "types":  {
+                                             "image":  "Ảnh",
+                                             "geo":  "Geo",
+                                             "imageLabel":  "Sơ đồ ảnh",
+                                             "geoLabel":  "Bản đồ Geo (MapLibre)"
+                                         },
+                               "modals":  {
+                                              "create":  {
+                                                             "title":  "Tạo bản đồ"
+                                                         },
+                                              "edit":  {
+                                                           "title":  "Sửa bản đồ"
+                                                       },
+                                              "delete":  {
+                                                             "title":  "Xóa bản đồ",
+                                                             "message":  "Xóa bản đồ {name}? Điều này sẽ xóa vị trí camera trên bản đồ."
+                                                         }
+                                          },
+                               "notifications":  {
+                                                     "create":  {
+                                                                    "title":  "Đã tạo bản đồ",
+                                                                    "message":  "Bản đồ đã được tạo."
+                                                                },
+                                                     "createFailed":  {
+                                                                          "title":  "Tạo thất bại"
+                                                                      },
+                                                     "update":  {
+                                                                    "title":  "Đã cập nhật bản đồ",
+                                                                    "message":  "{name} đã được cập nhật."
+                                                                },
+                                                     "updateFailed":  {
+                                                                          "title":  "Cập nhật thất bại"
+                                                                      },
+                                                     "delete":  {
+                                                                    "title":  "Đã xóa bản đồ",
+                                                                    "message":  "Bản đồ đã được xóa."
+                                                                },
+                                                     "deleteFailed":  {
+                                                                          "title":  "Xóa thất bại"
+                                                                      },
+                                                     "imageUploaded":  {
+                                                                           "title":  "Đã tải ảnh bản đồ",
+                                                                           "message":  "Đã cập nhật {name}."
+                                                                       },
+                                                     "uploadFailed":  {
+                                                                          "title":  "Tải ảnh thất bại"
+                                                                      },
+                                                     "positionsSaved":  {
+                                                                            "title":  "Đã lưu vị trí",
+                                                                            "message":  "Vị trí camera đã được cập nhật."
+                                                                        },
+                                                     "positionsFailed":  {
+                                                                             "title":  "Lưu thất bại"
+                                                                         }
+                                                 }
+                           },
+                  "activeGuard":  {
+                                      "subtitle":  "Danh sách camera Active Guard",
+                                      "title":  "Danh sách (chỉ đọc)",
+                                      "search":  {
+                                                     "placeholder":  "Tìm theo ID, tên, model hoặc IP"
+                                                 },
+                                      "table":  {
+                                                    "id":  "ID",
+                                                    "name":  "Tên",
+                                                    "model":  "Model",
+                                                    "ip":  "IP",
+                                                    "actions":  "Thao tác"
+                                                },
+                                      "actions":  {
+                                                      "copyId":  "Sao chép ID"
+                                                  },
+                                      "notifications":  {
+                                                            "copy":  {
+                                                                         "title":  "Đã sao chép",
+                                                                         "message":  "Đã sao chép Camera ID {id} vào clipboard."
+                                                                     },
+                                                            "copyFailed":  {
+                                                                               "title":  "Sao chép thất bại",
+                                                                               "message":  "Không có quyền truy cập clipboard."
+                                                                           }
+                                                        }
+                                  },
+                  "subscribers":  {
+                                      "subtitle":  "Điểm nhận webhook",
+                                      "title":  "Người nhận webhook",
+                                      "actions":  {
+                                                      "add":  "Thêm subscriber"
+                                                  },
+                                      "validation":  {
+                                                         "nameRequired":  "Vui lòng nhập tên",
+                                                         "endpointRequired":  "Vui lòng nhập endpoint"
+                                                     },
+                                      "notifications":  {
+                                                            "create":  {
+                                                                           "title":  "Đã lưu subscriber",
+                                                                           "message":  "Đã thêm webhook."
+                                                                       },
+                                                            "createFailed":  {
+                                                                                 "title":  "Lưu thất bại"
+                                                                             },
+                                                            "update":  {
+                                                                           "title":  "Đã cập nhật subscriber",
+                                                                           "message":  "Đã lưu webhook."
+                                                                       },
+                                                            "updateFailed":  {
+                                                                                 "title":  "Cập nhật thất bại"
+                                                                             },
+                                                            "delete":  {
+                                                                           "title":  "Đã xóa subscriber",
+                                                                           "message":  "Đã xóa webhook."
+                                                                       },
+                                                            "deleteFailed":  {
+                                                                                 "title":  "Xóa thất bại"
+                                                                             }
+                                                        },
+                                      "modals":  {
+                                                     "delete":  {
+                                                                    "title":  "Xóa subscriber?",
+                                                                    "message":  "Điều này sẽ ngừng gửi sự kiện đến {endpoint}."
+                                                                },
+                                                     "create":  {
+                                                                    "title":  "Thêm subscriber"
+                                                                },
+                                                     "edit":  {
+                                                                  "title":  "Sửa subscriber"
+                                                              }
+                                                 },
+                                      "table":  {
+                                                    "name":  "Tên",
+                                                    "endpoint":  "Endpoint",
+                                                    "status":  "Trạng thái",
+                                                    "created":  "Tạo lúc",
+                                                    "actions":  "Thao tác"
+                                                },
+                                      "form":  {
+                                                   "name":  "Tên",
+                                                   "endpointUrl":  "Endpoint URL",
+                                                   "enabled":  "Kích hoạt subscriber",
+                                                   "placeholders":  {
+                                                                        "name":  "Đội an ninh",
+                                                                        "endpointUrl":  "https://example.com/webhook"
+                                                                    }
+                                               }
+                                  },
+                  "cameras":  {
+                                  "subtitle":  "Tài khoản RTSP và cấu hình",
+                                  "title":  "Camera",
+                                  "search":  {
+                                                 "placeholder":  "Tìm theo ID, mã, IP, dòng, model..."
+                                             },
+                                  "actions":  {
+                                                  "scan":  "Quét camera",
+                                                  "add":  "Thêm camera",
+                                                  "testRtsp":  "Kiểm tra RTSP"
+                                              },
+                                  "validation":  {
+                                                     "cameraIdRequired":  "Vui lòng nhập Camera ID",
+                                                     "ipRequired":  "Vui lòng nhập IP",
+                                                     "profileRequired":  "Vui lòng nhập profile",
+                                                     "pathRequired":  "Vui lòng nhập path"
+                                                 },
+                                  "notifications":  {
+                                                        "save":  {
+                                                                     "title":  "Đã lưu camera",
+                                                                     "message":  "Đã lưu thông tin RTSP."
+                                                                 },
+                                                        "saveFailed":  {
+                                                                           "title":  "Lưu thất bại"
+                                                                       },
+                                                        "delete":  {
+                                                                       "title":  "Đã xóa camera",
+                                                                       "message":  "Bản ghi đã được xóa."
+                                                                   },
+                                                        "deleteFailed":  {
+                                                                             "title":  "Xóa thất bại"
+                                                                         },
+                                                        "rtsp":  {
+                                                                     "success":  {
+                                                                                     "title":  "RTSP khả dụng",
+                                                                                     "message":  "Luồng metadata phản hồi cho {id}."
+                                                                                 },
+                                                                     "failure":  {
+                                                                                     "title":  "RTSP lỗi",
+                                                                                     "message":  "Chưa thấy metadata cho {id}."
+                                                                                 }
+                                                                 },
+                                                        "rtspError":  {
+                                                                          "title":  "Kiểm tra RTSP thất bại"
+                                                                      },
+                                                        "scan":  {
+                                                                     "empty":  {
+                                                                                   "title":  "Không tìm thấy camera",
+                                                                                   "message":  "Đảm bảo camera và server cùng mạng."
+                                                                               }
+                                                                 },
+                                                        "scanFailed":  {
+                                                                           "title":  "Quét thất bại"
+                                                                       },
+                                                        "bulk":  {
+                                                                     "success":  {
+                                                                                     "title":  "Đã thêm camera",
+                                                                                     "message":  "{success} camera đã được thêm."
+                                                                                 },
+                                                                     "partial":  {
+                                                                                     "title":  "Thêm camera có lỗi",
+                                                                                     "message":  "{success} thêm, {failed} lỗi."
+                                                                                 },
+                                                                     "noneSelected":  {
+                                                                                          "title":  "Chưa chọn camera",
+                                                                                          "message":  "Chọn ít nhất 1 camera để thêm."
+                                                                                      },
+                                                                     "invalid":  {
+                                                                                     "title":  "Không có camera hợp lệ",
+                                                                                     "message":  "Camera đã chọn thiếu IP."
+                                                                                 }
+                                                                 },
+                                                        "bulkFailed":  {
+                                                                           "title":  "Thêm hàng loạt thất bại"
+                                                                       }
+                                                    },
+                                  "modals":  {
+                                                 "delete":  {
+                                                                "title":  "Xóa camera?",
+                                                                "message":  "Xóa camera {id}. Worker sẽ dừng sau lần refresh tiếp theo."
+                                                            },
+                                                 "create":  {
+                                                                "title":  "Thêm camera"
+                                                            },
+                                                 "edit":  {
+                                                              "title":  "Sửa camera"
+                                                          }
+                                             },
+                                  "table":  {
+                                                "id":  "ID",
+                                                "code":  "Mã",
+                                                "ip":  "IP",
+                                                "series":  "Dòng",
+                                                "model":  "Model",
+                                                "user":  "User",
+                                                "profile":  "Profile",
+                                                "path":  "Path",
+                                                "status":  "Trạng thái",
+                                                "updated":  "Cập nhật",
+                                                "actions":  "Thao tác"
+                                            },
+                                  "badges":  {
+                                                 "secret":  "Có mật khẩu",
+                                                 "noSecret":  "Không mật khẩu"
+                                             },
+                                  "scan":  {
+                                               "title":  "Quét camera",
+                                               "range":  {
+                                                             "title":  "Lọc theo dải IP",
+                                                             "subtitle":  "Tùy chọn: giới hạn quét theo dải IPv4.",
+                                                             "from":  "Từ IP",
+                                                             "to":  "Đến IP",
+                                                             "fromPlaceholder":  "192.168.1.10",
+                                                             "toPlaceholder":  "192.168.1.254",
+                                                             "found":  "{count} tìm thấy"
+                                                         },
+                                               "discovered":  {
+                                                                  "title":  "Camera i-PRO tìm thấy",
+                                                                  "subtitle":  "Chọn camera để thêm hàng loạt hoặc điền sẵn form.",
+                                                                  "ready":  "{count} sẵn sàng",
+                                                                  "existing":  "{count} đã có",
+                                                                  "selected":  "{count} đã chọn",
+                                                                  "empty":  "Không tìm thấy camera i-PRO.",
+                                                                  "selectAll":  "Chọn tất cả camera",
+                                                                  "cameraIndex":  "camera {index}",
+                                                                  "selectOne":  "Chọn {name}"
+                                                              },
+                                               "table":  {
+                                                             "name":  "Tên",
+                                                             "series":  "Dòng",
+                                                             "model":  "Model",
+                                                             "ip":  "IP",
+                                                             "mac":  "MAC",
+                                                             "deviceId":  "Device ID",
+                                                             "status":  "Trạng thái",
+                                                             "actions":  "Thao tác"
+                                                         },
+                                               "badges":  {
+                                                              "alreadyAdded":  "Đã có",
+                                                              "ready":  "Sẵn sàng",
+                                                              "missingIp":  "Thiếu IP"
+                                                          },
+                                               "actions":  {
+                                                               "prefill":  "Điền sẵn form",
+                                                               "alreadyInSystem":  "Đã có trong hệ thống",
+                                                               "missingIp":  "Thiếu địa chỉ IP"
+                                                           }
+                                           },
+                                  "bulk":  {
+                                               "title":  "Thêm hàng loạt",
+                                               "subtitle":  "Áp dụng cấu hình RTSP chung cho camera đã chọn.",
+                                               "actions":  {
+                                                               "addSelected":  "Thêm đã chọn"
+                                                           },
+                                               "enabled":  "Bật ingestion cho camera thêm mới"
+                                           },
+                                  "form":  {
+                                               "cameraId":  "Camera ID",
+                                               "code":  "Mã camera",
+                                               "ipAddress":  "Địa chỉ IP",
+                                               "series":  "Dòng camera",
+                                               "model":  "Model camera",
+                                               "rtspUsername":  "Tên đăng nhập RTSP",
+                                               "rtspPassword":  "Mật khẩu RTSP",
+                                               "rtspProfile":  "Profile",
+                                               "rtspPath":  "Path",
+                                               "enabled":  "Bật ingestion",
+                                               "placeholders":  {
+                                                                    "cameraId":  "D42DC52A966E",
+                                                                    "code":  "E001",
+                                                                    "ipAddress":  "192.168.100.58:554",
+                                                                    "series":  "x / s / u",
+                                                                    "model":  "Model name",
+                                                                    "rtspUsername":  "admin",
+                                                                    "rtspPassword":  "Password",
+                                                                    "rtspPasswordKeep":  "Để trống nếu muốn giữ mật khẩu cũ",
+                                                                    "rtspProfile":  "def_profile1",
+                                                                    "rtspPath":  "/ONVIF/MediaInput"
+                                                                }
+                                           }
+                              },
+                  "persons":  {
+                                  "subtitle":  "Danh sách người và mẫu khuôn mặt",
+                                  "title":  "Người",
+                                  "actions":  {
+                                                  "add":  "Thêm người",
+                                                  "scan":  "Quét VNeID",
+                                                  "enrollFace":  "Đăng ký khuôn mặt",
+                                                  "templates":  "Mẫu",
+                                                  "deactivateTemplate":  "Xóa"
+                                              },
+                                  "search":  {
+                                                 "placeholder":  "Tìm theo mã, tên hoặc danh mục"
+                                             },
+                                  "table":  {
+                                                "face":  "Ảnh",
+                                                "code":  "Mã",
+                                                "name":  "Tên",
+                                                "gender":  "Giới tính",
+                                                "age":  "Tuổi",
+                                                "category":  "Danh mục",
+                                                "listType":  "Loại danh sách",
+                                                "enroll":  "Đăng ký",
+                                                "status":  "Trạng thái",
+                                                "updated":  "Cập nhật",
+                                                "actions":  "Thao tác"
+                                            },
+                                  "status":  {
+                                                 "enrolled":  "Đã đăng ký",
+                                                 "notEnrolled":  "Chưa đăng ký"
+                                             },
+                                  "listType":  {
+                                                   "protectOption":  "Bảo vệ (không thuộc danh sách)",
+                                                   "protect":  "Bảo vệ",
+                                                   "white":  "Danh sách trắng",
+                                                   "black":  "Danh sách đen"
+                                               },
+                                  "validation":  {
+                                                     "codeRequired":  "Mã là bắt buộc.",
+                                                     "firstNameRequired":  "Tên là bắt buộc.",
+                                                     "lastNameRequired":  "Họ là bắt buộc.",
+                                                     "cameraRequired":  "Camera là bắt buộc.",
+                                                     "faceImageRequired":  "Ảnh khuôn mặt là bắt buộc."
+                                                 },
+                                  "crop":  {
+                                               "selectArea":  "Vui lòng chọn vùng cắt trước.",
+                                               "failed":  "Cắt ảnh thất bại."
+                                           },
+                                  "modals":  {
+                                                 "addPerson":  {
+                                                                   "title":  "Thêm người"
+                                                               },
+                                                 "editPerson":  {
+                                                                    "title":  "Sửa người"
+                                                                }
+                                             },
+                                  "enrollmentStatus":  {
+                                                           "label":  "Trạng thái đăng ký"
+                                                       },
+                                  "form":  {
+                                               "code":  "Mã",
+                                               "category":  "Danh mục",
+                                               "listType":  {
+                                                                "label":  "Loại danh sách",
+                                                                "placeholder":  "Chọn loại"
+                                                            },
+                                                "firstName":  "Tên",
+                                                "lastName":  "Họ",
+                                                "fullName":  "Họ và tên",
+                                                "personalId":  "Số định danh cá nhân",
+                                                "documentNumber":  "Số định danh cũ",
+                                                "gender":  "Giới tính",
+                                               "age":  "Tuổi",
+                                               "dateOfBirth":  "Ngày sinh",
+                                               "dateOfIssue":  "Ngày cấp",
+                                               "address":  "Địa chỉ",
+                                               "rawQrPayload":  "Nội dung QR gốc",
+                                               "remarks":  "Ghi chú",
+                                               "placeholders":  {
+                                                                     "code":  "E001",
+                                                                     "category":  "Nhân sự",
+                                                                     "firstName":  "Nguyễn",
+                                                                     "lastName":  "An",
+                                                                     "fullName":  "Nguyễn Văn A",
+                                                                     "personalId":  "Số định danh trên CCCD/VNeID",
+                                                                     "documentNumber":  "Số định danh / CMND cũ",
+                                                                     "gender":  "Nam",
+                                                                    "age":  "30",
+                                                                    "address":  "Địa chỉ từ CCCD / VNeID",
+                                                                    "rawQrPayload":  "Chuỗi QR gốc",
+                                                                    "remarks":  "Ghi chú thêm"
+                                                                }
+                                           },
+                                  "enroll":  {
+                                                 "title":  "Đăng ký khuôn mặt ngay",
+                                                 "subtitle":  "Tải ảnh khuôn mặt để đăng ký ngay.",
+                                                 "noCamera":  "Thêm camera trước khi đăng ký.",
+                                                 "camera":  "Camera",
+                                                 "cameraPlaceholder":  "Chọn camera",
+                                                 "noCameras":  "Không có camera",
+                                                 "faceImage":  "Ảnh khuôn mặt (JPEG)",
+                                                 "faceImagePlaceholder":  "Chọn ảnh",
+                                                 "cropTitle":  "Cắt khuôn mặt",
+                                                 "zoom":  "Thu phóng",
+                                                 "useOriginal":  "Dùng ảnh gốc",
+                                                 "croppedAlt":  "Khuôn mặt đã cắt",
+                                                 "sourceCamera":  "Mã camera nguồn (tùy chọn)",
+                                                 "sourceCameraPlaceholder":  "Mã camera",
+                                                 "storeFaceImage":  "Lưu ảnh khuôn mặt cùng template",
+                                                 "detect":  {
+                                                                "action":  "Phát hiện face",
+                                                                "results":  "Khuôn mặt phát hiện",
+                                                                "noFace":  "Không phát hiện khuôn mặt.",
+                                                                "noImage":  "Vui lòng chọn ảnh trước.",
+                                                                "failed":  "Phát hiện khuôn mặt thất bại.",
+                                                                "selected":  "Đã chọn",
+                                                                "faceAlt":  "Khuôn mặt phát hiện"
+                                                            },
+                                                 "modalTitle":  "Đăng ký khuôn mặt",
+                                                 "modalTitleWithName":  "Đăng ký khuôn mặt - {name}",
+                                                 "action":  "Đăng ký",
+                                                 "enrolledFaceAlt":  "Khuôn mặt đã đăng ký"
+                                             },
+                                  "templates":  {
+                                                    "title":  "Mẫu",
+                                                    "titleWithName":  "Mẫu - {name}",
+                                                    "total":  "Tổng mẫu: {total}",
+                                                    "empty":  "Chưa có mẫu nào.",
+                                                    "fields":  {
+                                                                   "version":  "Phiên bản",
+                                                                   "l2Norm":  "L2 Norm",
+                                                                   "source":  "Nguồn",
+                                                                   "updated":  "Cập nhật",
+                                                                   "created":  "Tạo"
+                                                               }
+                                                },
+                                  "confirmations":  {
+                                                        "delete":  {
+                                                                       "title":  "Xóa người?",
+                                                                       "message":  "Thao tác này sẽ vô hiệu hóa {name} ({code})."
+                                                                   },
+                                                        "templateDeactivate":  {
+                                                                                   "title":  "Xóa template?",
+                                                                                   "message":  "Thao tác này sẽ xóa vĩnh viễn template {id} của {name}.",
+                                                                                   "confirm":  "Xóa"
+                                                                               }
+                                                    },
+                                  "notifications":  {
+                                                        "created":  {
+                                                                        "title":  "Đã tạo người",
+                                                                        "message":  "Tạo hồ sơ thành công."
+                                                                    },
+                                                        "createdEnrolled":  {
+                                                                                "title":  "Đã tạo người và đăng ký",
+                                                                                "message":  "Đã lưu mẫu khuôn mặt."
+                                                                            },
+                                                        "createdPartial":  {
+                                                                               "title":  "Đã tạo người",
+                                                                               "message":  "{message} Vui lòng dùng Đăng ký để thử lại."
+                                                                           },
+                                                        "createFailed":  {
+                                                                             "title":  "Tạo thất bại",
+                                                                             "message":  "Không thể tạo người."
+                                                                         },
+                                                        "updated":  {
+                                                                        "title":  "Đã lưu người",
+                                                                        "message":  "Cập nhật hồ sơ thành công."
+                                                                    },
+                                                        "updateFailed":  {
+                                                                             "title":  "Lưu thất bại",
+                                                                             "message":  "Không thể lưu người."
+                                                                         },
+                                                        "deleted":  {
+                                                                        "title":  "Đã xóa người",
+                                                                        "message":  "Bản ghi đã được vô hiệu hóa."
+                                                                    },
+                                                        "deleteFailed":  {
+                                                                             "title":  "Xóa thất bại",
+                                                                             "message":  "Không thể xóa người."
+                                                                         },
+                                                        "enrollSuccess":  {
+                                                                              "title":  "Đăng ký hoàn tất",
+                                                                              "message":  "Đã lưu mẫu khuôn mặt."
+                                                                          },
+                                                        "enrollFailed":  {
+                                                                             "title":  "Đăng ký thất bại",
+                                                                             "message":  "Không thể đăng ký khuôn mặt."
+                                                                         },
+                                                        "templateRemoved":  {
+                                                                                "title":  "Đã gỡ template",
+                                                                                "message":  "Đã xóa mẫu khuôn mặt."
+                                                                            },
+                                                        "templateRemoveFailed":  {
+                                                                                     "title":  "Xóa thất bại",
+                                                                                     "message":  "Không thể gỡ template."
+                                                                                 },
+                                                        "templateUpdateFailed":  {
+                                                                                     "title":  "Cập nhật thất bại",
+                                                                                     "message":  "Không thể cập nhật trạng thái template."
+                                                                                 },
+                                                        "selectPerson":  {
+                                                                             "title":  "Chọn người",
+                                                                             "message":  "Chọn người để đăng ký."
+                                                                         },
+                                                        "noSystemCamera":  {
+                                                                                "title":  "Chưa có camera hệ thống",
+                                                                                "message":  "Đã điền thông tin vào biểu mẫu nhưng cần ít nhất một camera hệ thống để đăng ký khuôn mặt."
+                                                                         }
+                                                    },
+                                  "errors":  {
+                                                 "noPersonSelected":  "Chưa chọn người."
+                                             },
+                                  "scan":  {
+                                               "title":  "Quét VNeID",
+                                               "sourceLabel":  "Nguồn quét",
+                                               "useInForm":  "Dùng cho biểu mẫu",
+                                               "redo":  "Làm lại",
+                                               "personPanel":  "Thông tin đọc từ QR",
+                                               "facePanel":  "Khuôn mặt nhận được",
+                                               "faceAlt":  "Khuôn mặt nhận được",
+                                               "faceEmpty":  "Chưa có khuôn mặt.",
+                                               "sources":  {
+                                                               "system":  "Camera IP hệ thống",
+                                                               "local":  "Camera trong / USB"
+                                                           },
+                                               "fields":  {
+                                                              "code":  "Mã",
+                                                              "personalId":  "Số định danh cá nhân",
+                                                              "documentNumber":  "Số giấy tờ",
+                                                              "fullName":  "Họ và tên",
+                                                              "gender":  "Giới tính",
+                                                              "dateOfBirth":  "Ngày sinh",
+                                                              "dateOfIssue":  "Ngày cấp",
+                                                              "age":  "Tuổi",
+                                                              "address":  "Địa chỉ",
+                                                              "rawQrPayload":  "Nội dung QR gốc"
+                                                          },
+                                               "system":  {
+                                                              "camera":  "Camera hệ thống",
+                                                              "noCamera":  "Không có camera hệ thống nào.",
+                                                              "scanNow":  "Quét ngay",
+                                                              "snapshot":  "Ảnh chụp"
+                                                          },
+                                               "local":  {
+                                                             "camera":  "Camera trong / USB",
+                                                             "noDevice":  "Không tìm thấy camera cục bộ.",
+                                                             "unnamedCamera":  "Camera {index}",
+                                                             "enableCamera":  "Bật camera",
+                                                             "stopCamera":  "Dừng camera",
+                                                             "start":  "Bắt đầu",
+                                                             "preview":  "Xem trước trực tiếp",
+                                                             "previewOn":  "Camera đã bật",
+                                                             "previewOff":  "Camera đang dừng",
+                                                             "step1Title":  "Bước 1 · Đọc QR",
+                                                             "step1Hint":  "Đưa mã QR vào trước camera.",
+                                                             "step1Done":  "Đã đọc QR. Dữ liệu người đã sẵn sàng.",
+                                                             "step1Complete":  "Hoàn tất",
+                                                             "step2Title":  "Bước 2 · Chụp khuôn mặt trực tiếp",
+                                                             "step2Hint":  "Sau khi đọc xong QR, giữ khuôn mặt thật ở giữa khung hình.",
+                                                             "step2Done":  "Đã chụp được khuôn mặt trực tiếp.",
+                                                             "step2Complete":  "Hoàn tất",
+                                                             "unsupported":  "Trình duyệt này không hỗ trợ truy cập camera.",
+                                                             "enableFailed":  "Không thể bật camera.",
+                                                             "enableFirst":  "Hãy bật camera trước.",
+                                                             "faceFallback":  "Trình duyệt không có FaceDetector, hệ thống dùng vùng giữa khung hình với kiểm tra chặt.",
+                                                             "faceUnavailable":  "Trình duyệt này không thể tự động chụp khuôn mặt một cách tin cậy. Hãy giữ mặt ở giữa khung hình và thử lại."
+                                                         },
+                                               "errors":  {
+                                                              "qrFailed":  "Quét QR thất bại.",
+                                                              "faceFailed":  "Chụp khuôn mặt thất bại.",
+                                                              "systemFailed":  "Quét bằng camera hệ thống thất bại."
+                                                          },
+                                               "notifications":  {
+                                                                     "noSystemCamera":  {
+                                                                                             "title":  "Chưa có camera hệ thống",
+                                                                                             "message":  "Đã điền dữ liệu QR vào biểu mẫu, nhưng cần ít nhất một camera hệ thống để đăng ký khuôn mặt."
+                                                                                         }
+                                                                 }
+                                             }
+                              },
+                  "settings":  {
+                                   "subtitle":  "Quản lý cách cảnh báo gửi tới subscribers",
+                                   "title":  "Cài đặt",
+                                   "badge":  {
+                                                 "enabled":  "{count} bật"
+                                             },
+                                   "validation":  {
+                                                      "similarityRange":  "Similarity phải nằm trong khoảng 0-1.",
+                                                      "scoreRange":  "Score phải nằm trong khoảng 0-1.",
+                                                      "retentionDays":  "Số ngày lưu phải \u003e= 0.",
+                                                      "invalidUtc":  "Sai định dạng thời gian UTC.",
+                                                      "maxEvents":  "Số sự kiện tối đa phải \u003e= 1.",
+                                                      "invalidJsonMap":  "JSON map không hợp lệ."
+                                                  },
+                                   "notifications":  {
+                                                         "alarmSaved":  {
+                                                                            "title":  "Đã lưu cài đặt cảnh báo",
+                                                                            "message":  "Đã cập nhật rule gửi cảnh báo."
+                                                                        },
+                                                         "matchingSaved":  {
+                                                                               "title":  "Đã lưu cài đặt matching",
+                                                                               "message":  "Đã cập nhật ngưỡng matching."
+                                                                           },
+                                                         "bestshotSaved":  {
+                                                                               "title":  "Đã lưu cài đặt bestshot",
+                                                                               "message":  "Đã cập nhật đường dẫn và thời gian lưu."
+                                                                           },
+                                                         "saveFailed":  {
+                                                                            "title":  "Lưu thất bại"
+                                                                        },
+                                                         "reembedFinished":  {
+                                                                                 "title":  "Re-embed hoàn tất",
+                                                                                 "message":  "Đã xử lý {processed} sự kiện, tạo {created}."
+                                                                             },
+                                                         "reembedFailed":  {
+                                                                               "title":  "Re-embed thất bại"
+                                                                           }
+                                                     },
+                                   "alarm":  {
+                                                 "title":  "Bộ lọc gửi cảnh báo",
+                                                 "subtitle":  "Chọn nhóm khuôn mặt sẽ gửi webhook.",
+                                                 "badge":  "Webhooks",
+                                                 "filters":  {
+                                                                 "white":  {
+                                                                               "label":  "White list",
+                                                                               "description":  "Người đã biết thuộc White list."
+                                                                           },
+                                                                 "black":  {
+                                                                               "label":  "Black list",
+                                                                               "description":  "Người đã biết thuộc Black list."
+                                                                           },
+                                                                 "protect":  {
+                                                                                 "label":  "Protect",
+                                                                                 "description":  "Người đã biết chưa thuộc list (theo rule)."
+                                                                             },
+                                                                 "undefined":  {
+                                                                                   "label":  "Undefined",
+                                                                                   "description":  "Người lạ không trong watchlist."
+                                                                               }
+                                                             }
+                                             },
+                                   "bestshot":  {
+                                                    "title":  "Lưu trữ bestshot",
+                                                    "subtitle":  "Cấu hình nơi lưu bestshot và thời gian lưu sự kiện.",
+                                                    "badge":  "Lưu trữ",
+                                                    "folder":  {
+                                                                   "title":  "Thư mục bestshot",
+                                                                   "subtitle":  "Đường dẫn tương đối theo content root của API.",
+                                                                   "placeholder":  "bestshots"
+                                                               },
+                                                    "retention":  {
+                                                                      "title":  "Thời gian lưu (ngày)",
+                                                                      "subtitle":  "Áp dụng cho file bestshot và sự kiện lưu trữ."
+                                                                  }
+                                                },
+                                   "matching":  {
+                                                    "title":  "Ngưỡng matching",
+                                                    "subtitle":  "Tinh chỉnh ngưỡng similarity và score.",
+                                                    "badge":  "Matching",
+                                                    "similarity":  {
+                                                                       "title":  "Similarity",
+                                                                       "subtitle":  "Ngưỡng tối thiểu để xác định đã biết."
+                                                                   },
+                                                    "score":  {
+                                                                  "title":  "Score",
+                                                                  "subtitle":  "Bỏ qua sự kiện dưới ngưỡng này."
+                                                              }
+                                                },
+                                   "reembed":  {
+                                                   "title":  "Re-embed sự kiện khuôn mặt",
+                                                   "subtitle":  "Tạo lại vector từ bestshot đã lưu.",
+                                                   "badge":  "Bảo trì",
+                                                   "fromUtc":  {
+                                                                   "title":  "Từ UTC",
+                                                                   "subtitle":  "Ví dụ: 2026-01-01T00:00:00Z",
+                                                                   "placeholder":  "2026-01-01T00:00:00Z"
+                                                               },
+                                                   "toUtc":  {
+                                                                 "title":  "Đến UTC",
+                                                                 "subtitle":  "Ví dụ: 2026-01-02T00:00:00Z",
+                                                                 "placeholder":  "2026-01-02T00:00:00Z"
+                                                             },
+                                                   "cameraIds":  {
+                                                                     "title":  "Camera IDs (tùy chọn)",
+                                                                     "subtitle":  "Ngăn cách bằng dấu phẩy hoặc khoảng trắng. Để trống nếu tất cả camera.",
+                                                                     "placeholder":  "cam-1, cam-2"
+                                                                 },
+                                                   "targetVersion":  {
+                                                                         "title":  "Phiên bản feature mục tiêu",
+                                                                         "subtitle":  "Tuỳ chọn ghi đè phiên bản model vector.",
+                                                                         "placeholder":  "0.1"
+                                                                     },
+                                                   "featureMap":  {
+                                                                      "title":  "Map phiên bản feature (tùy chọn)",
+                                                                      "subtitle":  "JSON map: {example}.",
+                                                                      "placeholder":  "{\"cam-1\":\"0.1\",\"cam-2\":\"0.2\"}"
+                                                                  },
+                                                   "maxEvents":  {
+                                                                     "title":  "Số sự kiện tối đa mỗi lần",
+                                                                     "subtitle":  "Chia lô để tránh timeout."
+                                                                 },
+                                                   "dryRun":  {
+                                                                  "title":  "Dry run",
+                                                                  "subtitle":  "Chỉ đếm, không ghi vào DB.",
+                                                                  "label":  "Chế độ dry run"
+                                                              },
+                                                   "result":  {
+                                                                  "processed":  "Đã xử lý {count}",
+                                                                  "created":  "Đã tạo {count}",
+                                                                  "skipped":  "Bỏ qua {count}",
+                                                                  "failed":  "Lỗi {count}"
+                                                              },
+                                                   "actions":  {
+                                                                   "run":  "Chạy re-embed"
+                                                               }
+                                               }
+                               }
+              }
+}

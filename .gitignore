@@ -1,0 +1,14 @@
+*bin/
+*.log
+*obj
+CPlussExamp
+.vs/
+.vscode/
+.tmp/
+*.continue
+*.jpg
+*.png
+
+LightJSC.Api/bestshots
+LightJSC.Api/Client/mapstyles/fonts/
+LightJSC.Api/MapData/

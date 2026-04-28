@@ -1,0 +1,7 @@
+@LightJSC.Api_HostAddress = http://localhost:5177
+
+GET {{LightJSC.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+

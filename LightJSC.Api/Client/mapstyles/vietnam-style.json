@@ -1,0 +1,172 @@
+{
+  "version": 8,
+  "name": "LightJSC Vietnam",
+  "sources": {
+    "vietnam": {
+      "type": "vector",
+      "tiles": [
+        "/maptiles/{z}/{x}/{y}.pbf"
+      ],
+      "minzoom": 0,
+      "maxzoom": 14
+    }
+  },
+  "glyphs": "/mapstyles/fonts/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#eef2f7"
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "vietnam",
+      "source-layer": "water",
+      "paint": {
+        "fill-color": "#c5e8ff"
+      }
+    },
+    {
+      "id": "water-outline",
+      "type": "line",
+      "source": "vietnam",
+      "source-layer": "water",
+      "paint": {
+        "line-color": "#8ec4ff",
+        "line-width": 1
+      }
+    },
+    {
+      "id": "building-fill",
+      "type": "fill",
+      "source": "vietnam",
+      "source-layer": "buildings",
+      "minzoom": 12,
+      "paint": {
+        "fill-color": "#fde68a",
+        "fill-opacity": 0.5
+      }
+    },
+    {
+      "id": "building-outline",
+      "type": "line",
+      "source": "vietnam",
+      "source-layer": "buildings",
+      "minzoom": 12,
+      "paint": {
+        "line-color": "#f59e0b",
+        "line-width": 0.6
+      }
+    },
+    {
+      "id": "road-case",
+      "type": "line",
+      "source": "vietnam",
+      "source-layer": "roads",
+      "paint": {
+        "line-color": "#1f2937",
+        "line-width": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          5,
+          1.2,
+          14,
+          6.5
+        ]
+      }
+    },
+    {
+      "id": "road-fill",
+      "type": "line",
+      "source": "vietnam",
+      "source-layer": "roads",
+      "paint": {
+        "line-color": "#2f4b90",
+        "line-width": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          5,
+          0.5,
+          14,
+          5
+        ]
+      }
+    },
+    {
+      "id": "place-labels",
+      "type": "symbol",
+      "source": "vietnam",
+      "source-layer": "places",
+      "minzoom": 6,
+      "layout": {
+        "text-font": [
+          "Open Sans Regular",
+          "Arial Unicode MS Regular"
+        ],
+        "text-field": ["coalesce", ["get", "name"], ["get", "name:vi"]],
+        "text-size": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          6,
+          10,
+          14,
+          18
+        ],
+        "text-anchor": "center"
+      },
+      "paint": {
+        "text-color": "#1f2937"
+      }
+    },
+    {
+      "id": "road-labels",
+      "type": "symbol",
+      "source": "vietnam",
+      "source-layer": "roads",
+      "minzoom": 11,
+      "layout": {
+        "text-font": [
+          "Open Sans Regular",
+          "Arial Unicode MS Regular"
+        ],
+        "text-field": ["coalesce", ["get", "name:vi"], ["get", "name"]],
+        "text-size": 11,
+        "symbol-placement": "line",
+        "text-padding": 2
+      },
+      "paint": {
+        "text-color": "#0f172a",
+        "text-halo-color": "#f8fafc",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "water-labels",
+      "type": "symbol",
+      "source": "vietnam",
+      "source-layer": "water",
+      "minzoom": 10,
+      "layout": {
+        "text-font": [
+          "Open Sans Regular",
+          "Arial Unicode MS Regular"
+        ],
+        "text-field": ["coalesce", ["get", "name:vi"], ["get", "name"]],
+        "text-size": 11,
+        "symbol-placement": "line",
+        "text-letter-spacing": 0.05
+      },
+      "paint": {
+        "text-color": "#0b5ea8",
+        "text-halo-color": "#e0f2fe",
+        "text-halo-width": 1
+      }
+    }
+  ]
+}

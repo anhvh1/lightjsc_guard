@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I-Pro Face Subscriber Console</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=IBM+Plex+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="background">
+      <span class="glow glow-a"></span>
+      <span class="glow glow-b"></span>
+      <span class="glow glow-c"></span>
+    </div>
+
+    <header class="top-bar">
+      <div class="brand">
+        <div class="badge">Subscriber</div>
+        <div>
+          <h1>I-Pro Face Stream</h1>
+          <p>Realtime watchlist vs unknown face feed</p>
+        </div>
+      </div>
+      <div class="status-panel">
+        <div class="status">
+          <span class="dot" id="connectionDot"></span>
+          <span id="connectionState">Connecting...</span>
+        </div>
+        <div class="counts">
+          <div>
+            <span class="label">Known</span>
+            <span class="value" id="knownCount">0</span>
+          </div>
+          <div>
+            <span class="label">Unknown</span>
+            <span class="value" id="unknownCount">0</span>
+          </div>
+        </div>
+        <button class="theme-toggle" id="themeToggle">Toggle theme</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel">
+        <div class="panel-header known">
+          <h2>Watchlist Matches</h2>
+          <span class="hint">Known faces from watchlist</span>
+        </div>
+        <div class="list" id="knownList"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header unknown">
+          <h2>Unknown Faces</h2>
+          <span class="hint">Not found in watchlist</span>
+        </div>
+        <div class="list" id="unknownList"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>Webhook endpoint: <code>/api/v1/webhooks/face</code></div>
+      <div>SignalR stream: <code>/hubs/faces</code></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

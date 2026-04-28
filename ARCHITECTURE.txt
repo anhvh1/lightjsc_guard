@@ -1,0 +1,871 @@
+================================================================================
+                    LIGHTJSC SYSTEM ARCHITECTURE
+================================================================================
+Last Updated: March 18, 2026
+System: Production-ready .NET 8 Face Detection & Matching System
+
+================================================================================
+1. SYSTEM OVERVIEW
+================================================================================
+
+LightJSC is an intelligent face detection and matching system that ingests
+AI face metadata from i-PRO cameras via RTSP ONVIF MediaInput protocol.
+The system matches detected faces against watchlists (local or Active Guard)
+and dispatches face events to webhook subscribers with real-time notifications.
+
+Key Features:
+  • Real-time RTSP metadata ingestion from IP cameras
+  • Face detection and template extraction
+  • Cosine similarity-based face matching
+  • Dual watchlist support (local PostgreSQL or SQL Server Active Guard)
+  • Webhook event dispatch with HMAC authentication
+  • Web dashboard for monitoring and management
+  • REST API for system configuration and queries
+  • Background worker pipeline for async processing
+  • Prometheus metrics for observability
+  • Map visualization with geolocation tracking
+
+================================================================================
+2. PROJECT STRUCTURE
+================================================================================
+
+Solution: LightJSC.sln
+
+Projects:
+  ├── LightJSC.Api
+  │   └── ASP.NET Core Web API + Background Worker Hosting
+  │       - REST API endpoints
+  │       - Web dashboard (React/TypeScript frontend)
+  │       - Health checks and readiness probes
+  │       - Background service orchestration
+  │
+  ├── LightJSC.Core
+  │   └── Domain Models & Abstractions
+  │       - Entity models (Camera, Person, FaceEvent, etc.)
+  │       - Interface definitions
+  │       - Configuration options
+  │       - Value objects (GeoPoint, BoundingBox, etc.)
+  │
+  ├── LightJSC.Infrastructure
+  │   └── Data Access & External Service Integration
+  │       - PostgreSQL Entity Framework Core context
+  │       - SQL Server Active Guard read-only access
+  │       - RTSP camera connection management
+  │       - Face detection integrations
+  │       - Vector similarity indexing
+  │       - Data repositories and unit of work
+  │       - Metadata parsing (ONVIF)
+  │       - Image processing
+  │
+  ├── LightJSC.Workers
+  │   └── Background Processing Services
+  │       - Ingest pipeline (channel-based queues)
+  │       - Camera connection manager
+  │       - Watchlist synchronization
+  │       - Face matching engine
+  │       - Webhook dispatcher
+  │       - Bestshot retention service
+  │       - Pipeline health monitoring
+  │
+  ├── LightJSC.Subscriber
+  │   └── SignalR Hub for Real-time Updates
+  │       - WebSocket-based notifications
+  │       - Face event streaming
+  │       - Client subscriptions
+  │
+  ├── LightJSC.Web
+  │   └── Frontend Application (React + TypeScript + Vite)
+  │       - SPA dashboard
+  │       - Real-time event display
+  │       - Configuration UI
+  │       - Map visualization
+  │
+  └── LightJSC.Tests
+      └── Unit Tests
+          - Parser tests (ONVIF metadata)
+          - Deduplicator tests
+          - Vector index tests (cosine similarity)
+
+================================================================================
+3. ARCHITECTURAL LAYERS
+================================================================================
+
+3.1 PRESENTATION LAYER
+───────────────────────
+
+Web Frontend (LightJSC.Web):
+  • Framework: React + TypeScript + Vite
+  • Pages: Dashboard, Persons, Cameras, Face Events, Maps, Settings
+  • Components: Reusable UI components for common tasks
+  • State Management: API client integration
+  • Real-time Updates: SignalR WebSocket integration
+  • Styling: Custom CSS with map styles support
+
+REST API Controllers (LightJSC.Api/Controllers):
+  • AttendanceController - Employee attendance tracking
+  • CamerasController - Camera CRUD and RTSP testing
+  • DashboardController - System statistics and status
+  • FaceDetectionController - Manual face detection on images
+  • FaceEventsController - Query and filter face detection events
+  • FaceTraceController - Track face movements and locations
+  • MapsController - Map layouts and positioning
+  • MapStylesController - Map styling management
+  • MapTilesController - Map tile serving
+  • PersonScansController - Person scanning and queries
+  • PersonsController - Person CRUD and watchlist management
+  • ReembedController - Face re-embedding with new models
+  • SettingsController - System configuration
+  • SubscriberController - Webhook subscriber management
+  • SubscriberEventsController - Event log for webhooks
+
+3.2 API / SERVICE LAYER
+───────────────────────
+
+Core Services (LightJSC.Api/Services):
+  • BestshotResolver - Selects highest quality face image
+  • NullQrCodeDecoder - QR code parsing (stub)
+  • PersonScanSessionService - Session management for person scans
+
+Health Checks:
+  • ReadinessHealthCheck - Validates service dependencies
+
+Subscriber Hub (LightJSC.Subscriber):
+  • SignalR hub for real-time WebSocket connections
+  • Face event stream notifications
+  • Client group management
+
+3.3 BUSINESS LOGIC LAYER
+───────────────────────
+
+Processing Services (LightJSC.Infrastructure):
+  • RtspMetadataParser - Parses ONVIF MediaInput metadata
+  • OnvifDiscoveryService - Discovers ONVIF cameras on network
+  • ImageProcessingService - Image resizing, cropping, normalization
+  • EnrollmentService - Face template extraction (i-PRO CGI API)
+  • Vector/SimilarityCalculator - Cosine similarity matching
+
+Background Workers (LightJSC.Workers):
+  ├── CameraRegistryService
+  │   └── Manages RTSP camera connections and reconnection logic
+  │
+  ├── WatchlistSyncService
+  │   └── Periodically syncs watchlist from Active Guard or local DB
+  │       - Full refresh interval: configurable (e.g., 10 minutes)
+  │       - Per-item threshold matching
+  │
+  ├── MatchingWorkerService
+  │   └── Processes face events from ingest pipeline
+  │       - Performs cosine similarity matching
+  │       - Applies confidence thresholds
+  │       - Generates match decisions
+  │
+  ├── WebhookDispatcherService
+  │   └── Sends face events to registered subscribers
+  │       - HMAC-SHA256 authentication
+  │       - Retry logic with exponential backoff
+  │       - DLQ (Dead Letter Queue) for failed deliveries
+  │
+  ├── PipelineWatchdogService
+  │   └── Monitors ingest pipeline health
+  │       - Detects stalled metadata ingestion
+  │       - Tracks queue depths
+  │       - Alerts on pipeline issues
+  │
+  └── BestshotRetentionService
+      └── Manages bestshot image storage
+          - Stores best face images on local filesystem
+          - Cleanup of old images based on retention policy
+
+Ingest Pipeline (LightJSC.Workers/Pipeline):
+  • IngestPipeline - Lock-free channel-based async queue system
+  • Two main channels:
+    1. FaceEvents: RTSP metadata → parsed face events
+    2. Decisions: Face events → matching decisions
+  • Non-blocking write behavior (drops on overflow)
+  • Atomic counters for pipeline metrics
+
+3.4 DATA ACCESS LAYER
+──────────────────────
+
+PostgreSQL Context (Local Watchlist):
+  • IngestorDbContext (EF Core)
+  • DbSets:
+    - Cameras (RTSP credentials)
+    - Persons (watchlist)
+    - FaceTemplates (face embeddings)
+    - FaceEvents (detection events)
+    - Subscribers (webhook endpoints)
+    - DlqMessages (failed webhook deliveries)
+    - RuntimeState (state persistence)
+    - MapLayouts/MapCameraPositions (geolocation)
+
+Repositories (LightJSC.Infrastructure/Data/Repositories):
+  • CameraRepository - Camera CRUD and credential management
+  • PersonRepository - Person watchlist management
+  • FaceTemplateRepository - Face template storage/retrieval
+  • FaceEventRepository - Face event persistence
+  • SubscriberRepository - Webhook subscriber management
+  • DlqRepository - Dead letter queue management
+  • RuntimeStateRepository - System state persistence
+  • FaceEventSearchRepository - Optimized face event queries
+  • LocalWatchlistRepository - Active Guard SQL Server integration
+  • AttendanceRepository - Attendance tracking
+
+SQL Server Connection (Active Guard - Read-Only):
+  • Dapper-based data access
+  • Connection pooling via connection string
+  • Read-only queries for watchlist synchronization
+
+Vector Indexing:
+  • BruteForceVectorIndex - Full-scan cosine similarity
+  • PostgresFaceEventIndex - Event-level vector indexing
+  • PostgresVectorIndex - Person-level vector indexing
+  • VectorMath - Cosine similarity calculations
+
+================================================================================
+4. DATA FLOW / PROCESSING PIPELINE
+================================================================================
+
+4.1 FACE DETECTION FLOW
+───────────────────────
+
+Source: RTSP Camera (i-PRO with AI metadata)
+                ↓
+RTSP Metadata Receiver (CameraConnector)
+  • Establishes TCP connection to camera RTSP port
+  • Streams ONVIF MediaInput metadata
+  • Decodes face detection frames
+                ↓
+Metadata Parser (OnvifParser)
+  • Extracts face bounding boxes
+  • Extracts face templates (embeddings)
+  • Extracts confidence scores
+  • Associates with camera and timestamp
+                ↓
+Ingest Pipeline - FaceEvents Channel
+  • Enqueues parsed FaceEvent objects
+  • Atomic counter tracking
+  • Non-blocking (drops if capacity exceeded)
+                ↓
+Face Detection Storage
+  • Persists to FaceEvents table in PostgreSQL
+  • Creates searchable index
+  • Stores face image best-shot (if enabled)
+                ↓
+Dashboard/API
+  • Face events queryable via REST API
+  • Visible in web dashboard
+
+4.2 FACE MATCHING FLOW
+──────────────────────
+
+FaceEvent from Pipeline
+                ↓
+MatchingWorkerService
+  • Dequeues FaceEvent from pipeline
+  • Loads active watchlist (cached in memory)
+  • Performs cosine similarity matching
+  • Applies configurable confidence threshold
+  • Per-person threshold support
+                ↓
+Similarity Calculation
+  • Query: face template from detected face
+  • Targets: watchlist face templates
+  • Algorithm: Cosine similarity (dot product)
+  • Result: Vector<VectorMatch> with scores
+                ↓
+Decision Generation
+  • Creates FaceMatchDecision object
+  • Enqueues to Decisions channel
+  • Records match confidence scores
+  • Marks matched person (if any)
+                ↓
+Webhook Dispatch
+  • WebhookDispatcherService dequeues decision
+  • Generates JSON event payload
+  • Computes HMAC-SHA256 signature
+  • POSTs to each subscribed webhook endpoint
+  • Retry logic: exponential backoff
+  • Failed events → DLQ (Dead Letter Queue)
+
+4.3 WATCHLIST SYNCHRONIZATION
+──────────────────────────────
+
+WatchlistSyncService (Scheduled Background Task)
+
+Source Selection: appsettings.json "Watchlist:Source"
+
+If Source = "Local":
+  • Queries local Persons + FaceTemplates from PostgreSQL
+  • Loaded into in-memory watchlist
+  • Synced every N seconds (e.g., 20 seconds)
+  • Full refresh every M minutes (e.g., 10 minutes)
+
+If Source = "ActiveGuard":
+  • Queries SQL Server Active Guard database
+  • Reads from configured read-only connection
+  • Synchronizes face data periodically
+  • Falls back to local cache on failure
+
+Watchlist Cache:
+  • In-memory dictionary for fast lookup
+  • Thread-safe access during matching
+  • Atomic swap on full refresh
+
+================================================================================
+5. DATABASES
+================================================================================
+
+5.1 POSTGRESQL (Local Watchlist & Events)
+──────────────────────────────────────────
+
+Primary Data Store | Default: "ipro_face_ingestor"
+
+Tables and Purposes:
+  • cameras
+    - RTSP connection credentials
+    - Authentication for i-PRO cameras
+    - Status and last connection time
+    - Fields: cameraId, ipAddress, rtspUsername, rtspPassword, rtspProfile, etc.
+
+  • persons
+    - Watchlist entries
+    - Employee/subject profiles
+    - Fields: personId, code, firstName, lastName, category, isActive, etc.
+
+  • face_templates
+    - Face embeddings/vectors
+    - One-to-many with persons
+    - Fields: templateId, personId, embedding[], confidence, source, etc.
+
+  • face_event_records
+    - Detected face events
+    - One per face detection from cameras
+    - Fields: eventId, cameraId, timestamp, templateVector[], confidence, etc.
+
+  • subscribers
+    - Webhook subscriptions
+    - Filtering rules per subscriber
+    - Fields: subscriberId, webhookUrl, secret, enabled, categories, etc.
+
+  • dlq_messages
+    - Dead letter queue for failed webhooks
+    - Retry tracking
+    - Fields: messageId, subscriberId, payload, retryCount, lastError, etc.
+
+  • runtime_states
+    - System state persistence
+    - Last sync timestamps
+    - Watchlist version tracking
+
+  • map_layouts
+    - Map visualization configuration
+    - Camera positions on map
+
+  • map_camera_positions
+    - Geolocation of cameras
+    - Latitude/longitude/floor information
+
+Indexes:
+  • Primary keys on all tables
+  • Foreign key constraints
+  • Composite indexes on frequently queried fields
+  • Full-text search on person names
+  • Vector similarity indexes (if PostgreSQL pgvector extension used)
+
+5.2 SQL SERVER (Active Guard - Read-Only)
+──────────────────────────────────────────
+
+Optional Integration | Requires: Active Guard deployment
+
+Purpose: Read-only watchlist synchronization
+
+Typical Tables Accessed:
+  • Personnel/People table
+  • Face template/enrollment table
+  • Department/category information
+
+Connection: Configured in "ConnectionStrings:ActiveGuard"
+Authentication: SQL Server credentials
+Access Level: Read-only (enforced via database roles)
+
+Sync Mechanism:
+  • Dapper for lightweight querying
+  • Periodic full synchronization to local PostgreSQL
+  • Caching to reduce database load
+
+================================================================================
+6. EXTERNAL INTEGRATIONS
+================================================================================
+
+6.1 i-PRO CAMERAS
+──────────────────
+
+Protocol: RTSP + ONVIF MediaInput
+Connection: TCP to camera RTSP port
+Metadata: AI face detection frames in metadata stream
+
+Flow:
+  1. Camera configured in system with RTSP credentials
+  2. CameraConnector established persistent TCP connection
+  3. Receives ONVIF metadata frames
+  4. Parses face detection and template data
+  5. Enqueues to ingest pipeline
+
+6.2 WEBHOOK SUBSCRIBERS
+────────────────────────
+
+Protocol: HTTP REST (POST)
+Authentication: HMAC-SHA256
+
+Event Payload (face event):
+  {
+    "faceEventId": "uuid",
+    "cameraId": "CAM01",
+    "timestamp": "2026-03-18T10:30:45Z",
+    "matchedPersonId": "person-uuid" or null,
+    "matchConfidence": 0.95,
+    "faceImageUrl": "https://...",
+    "location": { "latitude": 10.5, "longitude": 106.5 }
+  }
+
+Security:
+  • HMAC-SHA256 signature in X-Webhook-Signature header
+  • Shared secret per subscriber
+  • Timestamp validation (prevent replay attacks)
+
+Reliability:
+  • Retry up to N attempts
+  • Exponential backoff (2^retry seconds)
+  • Failed deliveries stored in DLQ
+  • Manual retry via admin API
+
+6.3 PROMETHEUS METRICS
+───────────────────────
+
+Default Port: 9090 (in Docker)
+Configuration: prometheus.yml
+Metrics Exported:
+  • Face events ingested/matched/delivered count
+  • Pipeline queue depths
+  • Webhook delivery success/failure rates
+  • Camera connection status
+  • Matching performance (latency, accuracy)
+  • Database query performance
+  • HTTP request durations
+
+Grafana Integration:
+  • Dashboard creation on Prometheus data
+  • Real-time alerting visualization
+  • History and trends
+
+================================================================================
+7. CONFIGURATION SYSTEM
+================================================================================
+
+Configuration Sources (in priority order):
+  1. Environment variables
+  2. User Secrets (Development)
+  3. appsettings.{Environment}.json
+  4. appsettings.json
+
+Key Configuration Sections (Options Pattern):
+
+Encryption:
+  • Base64Key - 32-byte AES-GCM key for credential encryption
+
+Rtsp:
+  • Connection timeout, buffer sizes
+  • Metadata frame parsing settings
+
+Ingest:
+  • ChannelCapacity - Queue size for face events
+  • Processing workers count
+
+Watchlist:
+  • Source: "Local" or "ActiveGuard"
+  • SyncIntervalSeconds - Frequency of watchlist refresh
+  • FullRefreshMinutes - Complete resync interval
+  • UsePerItemThreshold - Per-person confidence thresholds
+
+Matching:
+  • DefaultConfidenceThreshold (0.0-1.0)
+  • Per-person thresholds override default
+  • VectorDimension - Face template dimension
+
+Webhook:
+  • HmacSecret - Shared secret for HMAC signing
+  • RetryCount - Max delivery attempts
+  • RetryDelaySeconds - Initial backoff delay
+  • TimeoutSeconds - HTTP request timeout
+
+Workers:
+  • MaxDegreeOfParallelism - Thread count
+  • MatchingWorkerCount
+  • WebhookDispatcherCount
+
+Enrollment:
+  • I-PRO CGI API endpoint configuration
+  • Image crop dimensions
+
+FaceDetection:
+  • Confidence thresholds
+  • Deduplication settings
+
+VectorIndex:
+  • Brute-force vs. approximate search
+  • Batch size for index updates
+
+Bestshot:
+  • Storage path
+  • Retention days
+  • Maximum image size
+
+Map:
+  • Map tile provider
+  • Zoom levels
+  • Center coordinates
+
+PipelineWatchdog:
+  • Stall timeout detection
+  • Alert threshold
+
+================================================================================
+8. SECURITY ARCHITECTURE
+================================================================================
+
+8.1 AUTHENTICATION & AUTHORIZATION
+────────────────────────────────────
+
+API Security:
+  • No built-in API authentication (assumed behind reverse proxy/load balancer)
+  • WAF/authentication delegated to infrastructure layer
+  • CORS policy configured for map endpoints
+
+Credential Encryption:
+  • RTSP camera credentials encrypted with AES-GCM
+  • Encryption key in user secrets
+  • Stored encrypted in database
+
+8.2 DATA PROTECTION
+─────────────────
+
+RTSP Credentials:
+  • Encrypted at rest (AES-GCM)
+  • Never logged or exposed in API responses
+  • Only decrypted for camera connection
+
+Webhook Secrets:
+  • HMAC-SHA256 signing key per subscriber
+  • Used for event authentication
+
+Database:
+  • PostgreSQL connection string in user secrets
+  • SQL Server credentials in user secrets
+  • No credentials in source control
+
+8.3 HTTPS / TLS
+════════════════
+
+  • Expected to be deployed behind reverse proxy (nginx, IIS)
+  • Proxy handles TLS termination
+  • Internal communication over HTTP (assumed trusted network)
+
+================================================================================
+9. MONITORING & OBSERVABILITY
+================================================================================
+
+Logging:
+  • Serilog for structured logging
+  • Sinks: Console, file (configurable)
+  • Log levels: Debug, Information, Warning, Error, Fatal
+  • Context: Request ID, user, operation timing
+
+Metrics:
+  • Prometheus exposition format
+  • Real-time counters and gauges
+  • Pipeline throughput monitoring
+
+Health Checks:
+  • /health endpoint
+  • /health/ready - Readiness probe
+  • Checks: database connectivity, external services
+
+Diagnostics:
+  • Pipeline metrics exposed via API
+  • Queue depths visible in dashboard
+  • Last activity timestamps tracked
+
+Performance Monitoring:
+  • Request/response timing
+  • Database query performance
+  • Face matching latency
+  • Webhook delivery success rates
+
+================================================================================
+10. DEPLOYMENT ARCHITECTURE
+================================================================================
+
+10.1 DOCKER DEPLOYMENT
+───────────────────────
+
+Services (docker-compose.yml):
+  ├── api (LightJSC.Api)
+  │   ├── Dockerfile: .NET 8 ASP.NET runtime
+  │   ├── Port: 8080 (HTTP)
+  │   ├── Env: Environment-specific configuration
+  │   └── Depends on: PostgreSQL, optionally SQL Server
+  │
+  ├── postgres (PostgreSQL 16)
+  │   ├── Port: 5432
+  │   ├── Data Volume: pgdata
+  │   └── Database: ipro_face_ingestor
+  │
+  ├── prometheus
+  │   ├── Port: 9090
+  │   ├── Config: prometheus.yml
+  │   └── Target: http://api:8080/metrics
+  │
+  └── grafana
+      ├── Port: 3000
+      └── DataSource: Prometheus
+
+Networking:
+  • Container network for internal service discovery
+  • Exposed ports for external access
+  • Reverse proxy recommended for production
+
+Volumes:
+  • pgdata - PostgreSQL persistent data
+  • bestshots/ - Best face image storage
+  • logs/ - Application logs
+
+10.2 INFRASTRUCTURE REQUIREMENTS
+──────────────────────────────────
+
+Minimum:
+  • 2 CPU cores
+  • 4 GB RAM
+  • 50 GB storage (grows with face images and events)
+  • PostgreSQL 12+
+  • SQL Server (optional, if Active Guard integration)
+
+Network:
+  • Connectivity to RTSP cameras (port 554 by default)
+  • Connectivity to webhook subscriber URLs (outbound HTTPS)
+  • Connectivity to SQL Server (if Active Guard)
+  • DNS resolution for external services
+
+10.3 IIS DEPLOYMENT (Alternative)
+──────────────────────────────────
+
+  • Publish as standalone executable
+  • Create app pool (.NET 8 managed pipeline)
+  • Configure bindings (HTTP/HTTPS)
+  • App settings via web.config or environment variables
+  • Static files served by IIS
+  • Reverse proxy not required (IIS handles it)
+
+================================================================================
+11. KEY DESIGN PATTERNS
+================================================================================
+
+11.1 ASYNC PIPELINE (Channel-based)
+────────────────────────────────────
+
+  • Non-blocking work queues
+  • Two-stage processing: Events → Decisions
+  • Drop overflow (no backpressure)
+  • Lock-free with atomic counters
+  • Multiple producers, multiple consumers
+
+11.2 REPOSITORY PATTERN
+────────────────────────
+
+  • Abstraction over data access
+  • Entity Framework Core for PostgreSQL
+  • Dapper for SQL Server (lightweight)
+  • Unit of work implied (single DbContext)
+
+11.3 OPTIONS PATTERN
+──────────────────────
+
+  • Strongly-typed configuration sections
+  • Dependency injection friendly
+  • IOptions<T> for singleton config
+  • IOptionsMonitor<T> for hot reload
+
+11.4 BACKGROUND WORKER ABSTRACTION
+─────────────────────────────────────
+
+  • IHostedService implementation
+  • Graceful shutdown handling
+  • Dependency injection for services
+
+11.5 VECTOR/SIMILARITY INDEXING
+──────────────────────────────────
+
+  • Abstraction for swappable implementations
+  • Brute-force: Full comparison (high latency, high accuracy)
+  • Approximate: Indexed search (low latency, approximate accuracy)
+  • Cosine similarity metric
+
+================================================================================
+12. TESTING STRATEGY
+================================================================================
+
+Unit Tests (LightJSC.Tests):
+  • ParserTests - ONVIF metadata parsing edge cases
+  • DeduplicatorTests - Duplicate face event filtering
+  • VectorIndexTests - Cosine similarity calculations
+  • Mocking external dependencies (cameras, databases)
+
+Integration Tests:
+  • Not shown in current structure
+  • Recommended: Docker-based test environment
+  • Database seeding and cleanup
+
+Test Doubles:
+  • NullQrCodeDecoder (stub/null object pattern)
+  • Mock RTSP metadata source
+
+================================================================================
+13. DEVELOPMENT WORKFLOW
+================================================================================
+
+Build:
+  $ dotnet build LightJSC.sln
+
+Run (Hosted Workers):
+  $ dotnet run --project LightJSC.Api
+
+Watch/Hot Reload:
+  $ dotnet watch run --project LightJSC.Api
+
+Database Migrations:
+  $ cd LightJSC.Infrastructure
+  $ dotnet ef database update
+
+Frontend Build (React):
+  $ cd LightJSC.Web
+  $ npm run build
+
+Docker Build:
+  $ docker-compose build
+
+Docker Run:
+  $ docker-compose up
+
+================================================================================
+14. TECHNOLOGY STACK
+================================================================================
+
+Backend:
+  • .NET 8 SDK / Runtime
+  • ASP.NET Core 8 (Web API + hosting)
+  • Entity Framework Core (ORM)
+  • Dapper (lightweight SQL access)
+  • PostgreSQL (primary database)
+  • SQL Server (external read-only)
+  • Serilog (logging)
+  • Prometheus (metrics)
+  • SignalR (real-time web)
+
+Frontend:
+  • React 18 (UI framework)
+  • TypeScript (type safety)
+  • Vite (bundler)
+  • CSS (styling)
+  • Leaflet (map library, implied)
+
+Infrastructure:
+  • Docker / Docker Compose
+  • Kubernetes (recommended for production)
+  • PostgreSQL 16
+  • Prometheus
+  • Grafana
+
+================================================================================
+15. SCALABILITY CONSIDERATIONS
+================================================================================
+
+Horizontal Scaling:
+  • Stateless API allows multiple instances
+  • Load balancer distributes requests
+  • Shared PostgreSQL database
+  • Shared webhook subscriber list
+
+Vertical Scaling:
+  • Increase worker thread count
+  • Larger pipeline channel capacity
+  • Vector index batch size tuning
+
+Bottlenecks:
+  • RTSP metadata ingestion rate
+  • Face matching (vector similarity) latency
+  • Webhook dispatch rate (external service dependency)
+  • Database connection pooling
+
+Optimization Strategies:
+  • Connection pooling tuning
+  • Query optimization (indexes)
+  • Vector index approximation (for large watchlists)
+  • Webhook batching
+  • Caching (watchlist in memory)
+
+================================================================================
+16. INCIDENT MANAGEMENT
+================================================================================
+
+Failure Scenarios:
+
+1. Camera Disconnection:
+   - CameraConnector retries with exponential backoff
+   - Status tracked in RuntimeState
+   - Alert via PipelineWatchdog
+
+2. Watchlist Sync Failure:
+   - Continues with last known watchlist (cached)
+   - Retry on next interval
+   - Alert in logs/monitoring
+
+3. Webhook Delivery Failure:
+   - Moves to DLQ (Dead Letter Queue)
+   - Manual retry available
+   - Admin notified via monitoring
+
+4. Database Connectivity Loss:
+   - Health check marks service as not ready
+   - Requests return 503 Service Unavailable
+   - Automatic reconnection attempts
+
+5. Pipeline Stall:
+   - PipelineWatchdog detects lack of metadata
+   - Alert triggered
+   - Potential camera issues investigated
+
+Recovery:
+  • Graceful degradation where possible
+  • Circuit breaker patterns (external dependencies)
+  • Manual intervention via admin API
+  • DLQ replay for webhook failures
+
+================================================================================
+17. FUTURE ENHANCEMENTS
+================================================================================
+
+Potential Improvements:
+  • Approximate nearest neighbor search (FAISS, Milvus)
+  • Multi-model face detection (ensemble methods)
+  • Real-time face re-identification across cameras
+  • Advanced analytics and reporting
+  • Mobile app for monitoring
+  • AI-powered anomaly detection
+  • Federated learning for distributed face models
+  • Edge deployment (on-camera processing)
+  • Multi-tenancy support
+  • Advanced access control (RBAC/ABAC)
+
+================================================================================
+END OF DOCUMENT
+================================================================================

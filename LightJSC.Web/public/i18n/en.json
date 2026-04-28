@@ -1,0 +1,1729 @@
+﻿{
+    "app":  {
+                "title":  "Central security monitoring system",
+                "logoAlt":  "LightJSC",
+                "badge":  {
+                              "console":  "Console"
+                          },
+                "apiTarget":  "API: {target}"
+            },
+    "menu":  {
+                 "dashboard":  {
+                                   "label":  "Dashboard",
+                                   "desc":  "Health and quick stats"
+                               },
+                 "welcome":  {
+                                 "label":  "Welcome",
+                                 "desc":  "Realtime arrival greeting"
+                             },
+                 "attendance":  {
+                                   "label":  "Attendance",
+                                   "desc":  "Monthly in and out summary"
+                               },
+                 "sizing":  {
+                                 "label":  "Sizing",
+                                 "desc":  "Estimate server, client and storage"
+                             },
+                 "faceStream":  {
+                                    "label":  "Face Stream",
+                                    "desc":  "Realtime feed"
+                                },
+                 "faceTrace":  {
+                                   "label":  "Face Trace",
+                                   "desc":  "Tracking and search"
+                               },
+                 "cameras":  {
+                                 "label":  "Cameras",
+                                 "desc":  "RTSP credentials and profiles"
+                             },
+                 "maps":  {
+                              "label":  "Maps",
+                              "desc":  "Layouts and camera placement"
+                          },
+                 "persons":  {
+                                 "label":  "Persons",
+                                 "desc":  "Profiles and enrollments"
+                             },
+                 "subscribers":  {
+                                     "label":  "Subscribers",
+                                     "desc":  "Webhook destinations"
+                                 },
+                 "settings":  {
+                                  "label":  "Settings",
+                                  "desc":  "Alarm delivery rules"
+                              }
+             },
+    "common":  {
+                   "language":  {
+                                    "switchTo":  {
+                                                     "vi":  "Switch to Vietnamese",
+                                                     "en":  "Switch to English"
+                                                 }
+                                },
+                   "theme":  {
+                                 "switchToLight":  "Switch to light",
+                                 "switchToDark":  "Switch to dark"
+                             },
+                   "actions":  {
+                                   "toggleSidebar":  "Toggle sidebar",
+                                   "refresh":  "Refresh",
+                                   "create":  "Create",
+                                   "save":  "Save",
+                                   "update":  "Update",
+                                   "delete":  "Delete",
+                                   "cancel":  "Cancel",
+                                   "edit":  "Edit",
+                                   "apply":  "Apply",
+                                   "clearSelection":  "Clear selection"
+                               },
+                   "time":  {
+                                "secondsAgo":  "{n} seconds ago",
+                                "minutesAgo":  "{n} minutes ago",
+                                "hoursAgo":  "{n} hours ago"
+                            },
+                   "empty":  {
+                                 "noImage":  "No image"
+                             },
+                   "fields":  {
+                                  "camera":  "Camera",
+                                  "cameraIp":  "Camera IP",
+                                  "time":  "Time",
+                                  "zone":  "Zone",
+                                  "name":  "Name",
+                                  "age":  "Age",
+                                  "gender":  "Gender",
+                                  "mask":  "Mask",
+                                  "faces":  "Faces",
+                                  "similarity":  "Similarity",
+                                  "score":  "Score",
+                                  "trace":  "Trace",
+                                  "watchlist":  "Watchlist",
+                                  "person":  "Person",
+                                  "category":  "Category",
+                                  "remarks":  "Remarks"
+                              },
+                   "status":  {
+                                  "active":  "Active",
+                                  "known":  "Known",
+                                  "unknown":  "Unknown",
+                                  "enabled":  "Enabled",
+                                  "disabled":  "Disabled"
+                              },
+                   "states":  {
+                                  "updating":  "Updating",
+                                  "updatedAt":  "Updated at {time}",
+                                  "awaiting":  "Awaiting"
+                              },
+                   "severity":  {
+                                    "critical":  "Critical",
+                                    "high":  "High",
+                                    "warn":  "Warning",
+                                    "low":  "Low",
+                                    "normal":  "Normal"
+                                },
+                   "pagination":  {
+                                      "showing":  "Showing {from}-{to} of {total}",
+                                      "perPage":  "{count} / page"
+                                  }
+               },
+    "components":  {
+                       "map":  {
+                                   "geoOnly":  "Select a Geo map to view live markers.",
+                                   "geoStyleMissingShort":  "Missing Geo style URL.",
+                                   "geoStyleMissing":  "Geo style URL not configured.",
+                                   "selectMap":  "Select map",
+                                   "refreshMaps":  "Refresh maps",
+                                   "imageMissing":  "No image",
+                                   "empty":  "No map data",
+                                   "zoomIn":  "Zoom in",
+                                   "zoomOut":  "Zoom out",
+                                   "resetView":  "Reset view"
+                               }
+                   },
+    "pages":  {
+                  "attendance":  {
+                                     "subtitle":  "Monthly in and out report",
+                                     "title":  "Attendance summary",
+                                     "actions":  {
+                                                     "refresh":  "Refresh data",
+                                                     "export":  "Export list",
+                                                     "viewDetail":  "View detail"
+                                                 },
+                                     "filters":  {
+                                                     "title":  "Summary filters",
+                                                     "month":  "Month",
+                                                     "year":  "Year",
+                                                     "cameras":  "Cameras",
+                                                     "camerasPlaceholder":  "Leave empty for all cameras",
+                                                     "departments":  "Departments",
+                                                     "departmentsPlaceholder":  "Leave empty for all departments",
+                                                     "people":  "Persons",
+                                                     "peoplePlaceholder":  "Leave empty for all persons"
+                                                 },
+                                     "tableTitle":  "Daily attendance grid",
+                                     "totalRows":  "{count} people",
+                                     "states":  {
+                                                    "loading":  "Loading attendance data"
+                                                },
+                                     "columns":  {
+                                                     "index":  "No.",
+                                                     "fullName":  "Full name",
+                                                     "personalId":  "Personal ID",
+                                                     "department":  "Department",
+                                                     "dayLabel":  "Day {day}",
+                                                     "in":  "In",
+                                                     "out":  "Out"
+                                                 },
+                                     "detail":  {
+                                                    "eventTitle":  "Detection detail",
+                                                    "noEvent":  "Detection detail not found.",
+                                                    "personTitle":  "Person detail",
+                                                    "dayFilter":  "Day",
+                                                    "allDays":  "Whole month",
+                                                    "dayLabel":  "Day {day}",
+                                                    "monthTab":  "Whole month",
+                                                    "dayTab":  "By day",
+                                                    "monthEmpty":  "No detections found in the selected month.",
+                                                    "dayEmpty":  "No detections found on the selected day.",
+                                                    "selectDayHint":  "Choose a specific day to view detections for that day."
+                                                },
+                                     "empty":  {
+                                                   "title":  "No data",
+                                                   "message":  "There are no records matching the current filters."
+                                               },
+                                     "export":  {
+                                                    "emptyTitle":  "No data to export",
+                                                    "emptyMessage":  "Adjust the filters or wait for more detections to arrive.",
+                                                    "dayPrefix":  "Day"
+                                                }
+                                 },
+                 "sizing":  {
+                                 "subtitle":  "Sizing tool for real deployments",
+                                 "title":  "System sizing",
+                                 "actions":  {
+                                                 "reset":  "Reset defaults",
+                                                 "exportXlsx":  "Export XLSX",
+                                                 "exportCsv":  "Export CSV",
+                                                 "exportJson":  "Export JSON",
+                                                 "showAdvanced":  "Show custom",
+                                                 "hideAdvanced":  "Hide custom"
+                                             },
+                                 "info":  {
+                                              "title":  "Sizing based on real event workload",
+                                              "message":  "This tool follows the current LightJSC event-centric architecture: metadata ingest, PostgreSQL/pgvector matching, bestshot storage and realtime event delivery. It is not a substitute for multi-stream live video sizing in the browser."
+                                          },
+                                 "inputs":  {
+                                                "title":  "Input parameters",
+                                                "subtitle":  "Only the main inputs are shown. All other values stay at their defaults unless customized.",
+                                                "preset":  "Site preset",
+                                                "siteCount":  "Site count",
+                                                "cameraCount":  "Enabled AI cameras",
+                                                "activeHours":  "Active hours per day",
+                                                "avgEventsPerMinute":  "Average detections/minute/camera",
+                                                "peakEventsPerMinute":  "Peak detections/minute/camera",
+                                                "knownRatio":  "Known ratio",
+                                                "webhookSubscribers":  "Webhook subscribers",
+                                                "personCount":  "Person count",
+                                                "templatesPerPerson":  "Templates per person",
+                                                "activeTemplateRatio":  "Active template ratio",
+                                                "growthPercent12m":  "12-month growth",
+                                                "retentionDays":  "Retention (days)",
+                                                "avgBestshotKb":  "Average bestshot (KB/event)",
+                                                "avgDbKb":  "Average database size (KB/event)",
+                                                "avgRealtimePayloadKb":  "Realtime payload (KB/event)",
+                                                "saveKnown":  "Store known bestshot/events",
+                                                "saveUnknown":  "Store unknown bestshot/events",
+                                                "saveThumb":  "Store thumbnails",
+                                                "standbyNode":  "Add standby node",
+                                                "dashboardUsers":  "Dashboard users",
+                                                "faceStreamUsers":  "Face Stream users",
+                                                "welcomeUsers":  "Welcome screens",
+                                                "attendanceUsers":  "Attendance users",
+                                                "enrollmentStations":  "VNeID scan stations",
+                                                "adminUsers":  "Admin/report users",
+                                                "liveVideoOperators":  "Future live video operators",
+                                                "futureLiveView":  "Plan live video on web",
+                                                "advancedHint":  "Custom inputs are hidden and currently use default values. Open them only when you need to fine-tune."
+                                            },
+                                 "sections":  {
+                                                  "workload":  "Event workload",
+                                                  "watchlist":  "Watchlist and growth",
+                                                  "storage":  "Storage",
+                                                  "webUsers":  "Web users"
+                                              },
+                                 "presets":  {
+                                                 "office":  { "label":  "Office" },
+                                                 "lobby":  { "label":  "Lobby" },
+                                                 "gate":  { "label":  "Access gate" },
+                                                 "factory":  { "label":  "Factory" },
+                                                 "school":  { "label":  "School" },
+                                                 "retail":  { "label":  "Retail / showroom" }
+                                             },
+                                 "kpis":  {
+                                              "peakEps":  "Peak EPS",
+                                              "avgEpsCaption":  "Avg EPS: {value}",
+                                              "eventsPerDay":  "Events per day",
+                                              "storedEventsCaption":  "Stored events/day: {value}",
+                                              "storage":  "Usable storage",
+                                              "storageCaption":  "Daily growth: {value} GB",
+                                              "realtime":  "Realtime egress",
+                                              "realtimeCaption":  "Realtime users: {users}"
+                                          },
+                                 "tiers":  {
+                                               "pilot":  { "label":  "Pilot" },
+                                               "standard":  { "label":  "Standard" },
+                                               "large":  { "label":  "Large scale" },
+                                               "enterprise":  { "label":  "Enterprise" }
+                                           },
+                                 "architectures":  {
+                                                       "allInOne":  {
+                                                                        "label":  "All-in-one",
+                                                                        "title":  "Single box deployment",
+                                                                        "description":  "Fits pilot or small sites with low event throughput and moderate retention."
+                                                                    },
+                                                       "splitDatabase":  {
+                                                                              "label":  "Split database",
+                                                                              "title":  "Dedicated PostgreSQL/pgvector node",
+                                                                              "description":  "Recommended for most production deployments because PostgreSQL is the first bottleneck for matching and event storage."
+                                                                          },
+                                                       "splitRealtime":  {
+                                                                              "label":  "Split realtime",
+                                                                              "title":  "Dedicated realtime/webhook node",
+                                                                              "description":  "Useful when many Welcome/Face Stream screens or many subscribers should be isolated from the core ingest node."
+                                                                          },
+                                                       "requiresArchitectureV2":  {
+                                                                                     "label":  "Architecture V2 required",
+                                                                                     "title":  "Architecture review required",
+                                                                                     "description":  "This scale is beyond the safe zone of the current single active ingest architecture. Plan for camera sharding, central queueing and separated workers."
+                                                                                 }
+                                                   },
+                                 "warnings":  {
+                                                  "singleActiveNode":  {
+                                                                           "title":  "Core ingest should stay single active",
+                                                                           "message":  "The current architecture is not ready for active-active ingest on multiple nodes without camera lease or sharding."
+                                                                       },
+                                                  "splitDatabaseRecommended":  {
+                                                                                    "title":  "Dedicated PostgreSQL is recommended",
+                                                                                    "message":  "As camera count, Peak EPS or watchlist size grows, pgvector search and event writes become the first bottleneck."
+                                                                                },
+                                                  "splitRealtimeRecommended":  {
+                                                                                    "title":  "Separate realtime/webhook node is recommended",
+                                                                                    "message":  "Many realtime users or webhook subscribers increase egress and queue pressure on the core node."
+                                                                                },
+                                                  "standbyRecommended":  {
+                                                                             "title":  "Standby node is recommended",
+                                                                             "message":  "This workload is large enough to justify a warm or hot standby for the primary ingest node."
+                                                                         },
+                                                  "httpsRequiredForEnrollment":  {
+                                                                                    "title":  "Local scan stations require HTTPS",
+                                                                                    "message":  "If USB/local camera scanning is used in the browser, the site must run on HTTPS or an equivalent secure origin."
+                                                                                },
+                                                  "retentionHigh":  {
+                                                                         "title":  "Retention is quite long",
+                                                                         "message":  "Long retention quickly increases filesystem and PostgreSQL growth. Review archive and cleanup policies."
+                                                                     },
+                                                  "storageHigh":  {
+                                                                       "title":  "Storage footprint is high",
+                                                                       "message":  "Separate data, WAL and bestshot volumes; prefer enterprise SSDs with strong write endurance."
+                                                                   },
+                                                  "eventRateHigh":  {
+                                                                         "title":  "Peak EPS is high",
+                                                                         "message":  "High event rates can drive ingest/webhook queues upward and create drops unless architecture or hardware is upgraded."
+                                                                     },
+                                                  "architectureLimit":  {
+                                                                            "title":  "The current architecture is at its limit",
+                                                                            "message":  "Plan for V2 architecture with camera sharding, central queueing and separated matching/webhook workers."
+                                                                        },
+                                                  "watchlistLarge":  {
+                                                                         "title":  "Watchlist is very large",
+                                                                         "message":  "A very large active template set increases RAM/cache demand and HNSW indexing time on PostgreSQL."
+                                                                     },
+                                                  "liveViewNeedsSeparateSizing":  {
+                                                                                    "title":  "Live video needs separate sizing",
+                                                                                    "message":  "If the project later adds many browser live streams, size separately for codec, fps, layout and client decode capability."
+                                                                                }
+                                              },
+                                 "notes":  {
+                                               "allInOne":  "App, workers and DB on one box",
+                                               "metadataOnly":  "Optimized for metadata, not full video decode",
+                                               "activeCore":  "Primary active core node",
+                                               "singleActiveOnly":  "Do not run ingest active-active",
+                                               "pgvectorHeavy":  "Heavy pgvector workload",
+                                               "nvmeRequired":  "Prefer enterprise NVMe",
+                                               "signalrWebhook":  "Split SignalR and webhook load",
+                                               "optionalForIsolation":  "Optional isolation node",
+                                               "warmStandby":  "Warm/hot standby",
+                                               "doNotRunActiveActive":  "Avoid active-active",
+                                               "eventUi":  "Primarily event, chart and map UI",
+                                               "fhdRecommended":  "FHD display recommended",
+                                               "kioskMode":  "For welcome kiosk use",
+                                               "wiredLan":  "Prefer wired LAN",
+                                               "usbCamera":  "Uses USB/local camera",
+                                               "httpsRequired":  "Requires HTTPS",
+                                               "reportsTrace":  "Suitable for reports and trace",
+                                               "exportWorkloads":  "Handles export workloads",
+                                               "browserDecode":  "Needs strong browser decode",
+                                               "separateAssessment":  "Assess live video separately"
+                                           },
+                                 "results":  {
+                                                 "summary":  {
+                                                                 "subtitle":  "Architecture conclusion",
+                                                                 "title":  "Recommended approach",
+                                                                 "current":  "Current workload",
+                                                                 "cameraCount":  "Camera count",
+                                                                 "activeTemplates":  "Active templates",
+                                                                 "recommendedNic":  "Recommended NIC",
+                                                                 "ingest":  "Ingest bandwidth",
+                                                                 "projection12m":  "12-month projection",
+                                                                 "tier":  "Sizing tier"
+                                                             },
+                                                 "warnings":  {
+                                                                  "subtitle":  "Risks and notes",
+                                                                  "title":  "Deployment warnings"
+                                                              },
+                                                 "server":  {
+                                                                "subtitle":  "Server hardware",
+                                                                "title":  "Recommended nodes",
+                                                                "columns":  {
+                                                                                "role":  "Role",
+                                                                                "count":  "Qty",
+                                                                                "cpu":  "CPU cores",
+                                                                                "ram":  "RAM",
+                                                                                "storage":  "Storage",
+                                                                                "notes":  "Notes"
+                                                                            },
+                                                                "storageParts":  {
+                                                                                      "system":  "OS/Application",
+                                                                                      "data":  "Data",
+                                                                                      "bestshot":  "Bestshot",
+                                                                                      "database":  "Database",
+                                                                                      "mixed":  "Bestshot + database"
+                                                                                  },
+                                                                "roles":  {
+                                                                              "app":  "Service server",
+                                                                              "database":  "PostgreSQL/pgvector",
+                                                                              "realtime":  "Realtime/Webhook",
+                                                                              "standby":  "Standby"
+                                                                          }
+                                                            },
+                                                 "clients":  {
+                                                                 "subtitle":  "Client devices",
+                                                                "title":  "Workstations",
+                                                                 "columns":  {
+                                                                                 "role":  "Role",
+                                                                                 "count":  "Qty",
+                                                                                 "cpu":  "CPU",
+                                                                                 "ram":  "RAM",
+                                                                                 "storage":  "Storage",
+                                                                                 "notes":  "Notes"
+                                                                             },
+                                                                 "roles":  {
+                                                                               "operator":  "Standard operator",
+                                                                               "welcome":  "Welcome kiosk",
+                                                                               "enrollment":  "VNeID scan station",
+                                                                               "admin":  "Admin/Report",
+                                                                               "video":  "Live video station"
+                                                                           }
+                                                             },
+                                                 "network":  {
+                                                                 "subtitle":  "Network and realtime",
+                                                                 "title":  "Bandwidth estimate",
+                                                                 "ingest":  "Camera ingest",
+                                                                 "ingestCaption":  "Estimated metadata + bestshot traffic from cameras into the core node.",
+                                                                 "realtime":  "Web realtime egress",
+                                                                 "realtimeCaption":  "Calculated for {count} concurrent Welcome/Face Stream users."
+                                                             },
+                                                 "bom":  {
+                                                             "subtitle":  "Suggested equipment list",
+                                                             "title":  "Preliminary BOM",
+                                                             "columns":  {
+                                                                             "item":  "Item",
+                                                                             "quantity":  "Qty",
+                                                                             "spec":  "Specification"
+                                                                         }
+                                                         }
+                                             },
+                                "export":  {
+                                               "sheetName":  "Sizing",
+                                               "columns":  {
+                                                               "index":  "Stt",
+                                                               "system":  "System",
+                                                               "quantity":  "Quantity",
+                                                               "cpu":  "CPU cores",
+                                                               "ram":  "Ram",
+                                                               "storage":  "Storage",
+                                                               "notes":  "Notes"
+                                                           },
+                                               "system":  {
+                                                              "server":  "Service server",
+                                                              "workstation":  "Workstation"
+                                                          },
+                                               "notes":  {
+                                                             "clientSummary":  "Uses the highest workstation specification across all workstation groups. Total quantity: {count}.",
+                                                             "noClient":  "No workstation requirement."
+                                                         }
+                                           },
+                                 "notifications":  {
+                                                       "reset":  {
+                                                                     "title":  "Defaults restored",
+                                                                     "message":  "The sizing tool has been reset to the default assumptions."
+                                                                 },
+                                                       "exportXlsxFailed":  {
+                                                                                "title":  "XLSX export failed",
+                                                                                "message":  "Unable to generate the XLSX file."
+                                                                 }
+                                                   }
+                             },
+                 "welcome":  {
+                                  "subtitle":  "Arrival greeting board by AI camera",
+                                  "title":  "Welcome",
+                                  "actions":  {
+                                                  "refresh":  "Refresh data"
+                                              },
+                                  "status":  {
+                                                 "connecting":  "Connecting",
+                                                 "live":  "Live",
+                                                 "reconnecting":  "Reconnecting",
+                                                 "disconnected":  "Disconnected",
+                                                 "failed":  "Connection failed"
+                                             },
+                                  "states":  {
+                                                 "loading":  "Loading today data"
+                                             },
+                                  "camera":  {
+                                                 "placeholder":  "Select AI camera",
+                                                 "none":  "No camera selected",
+                                                 "emptyTitle":  "No camera available",
+                                                 "emptyMessage":  "Enable at least one AI camera in the system to use the welcome board."
+                                             },
+                                  "stats":  {
+                                                "uniqueToday":  "Visitors today",
+                                                "greetingsToday":  "Greetings today",
+                                                "liveStatus":  "Realtime status"
+                                            },
+                                  "hero":  {
+                                               "subtitle":  "Welcome area",
+                                               "badge":  "WELCOME",
+                                               "description":  "The latest registered visitor recognized by the selected camera will be highlighted here for a clear greeting experience."
+                                           },
+                                  "fields":  {
+                                                 "personalId":  "Personal ID",
+                                                 "department":  "Department"
+                                             },
+                                  "gender":  {
+                                                 "male":  "Male",
+                                                 "female":  "Female"
+                                             },
+                                  "recent":  {
+                                                 "subtitle":  "Live updates",
+                                                 "title":  "Latest arrivals",
+                                                 "emptyTitle":  "No welcome data yet",
+                                                 "emptyMessage":  "When the selected camera recognizes a registered person, this list will update automatically."
+                                             },
+                                  "summary":  {
+                                                  "label":  "Total visitors for the current day",
+                                                  "caption":  "Recorded greetings: {count}"
+                                              },
+                                  "empty":  {
+                                                "title":  "Waiting for the next arrival",
+                                                "message":  "Choose a camera above. The welcome board will light up here as soon as a registered person is recognized."
+                                            },
+                                  "greetings":  {
+                                                    "morning":  "Good morning",
+                                                    "afternoon":  "Welcome",
+                                                    "evening":  "Good evening"
+                                                },
+                                  "errors":  {
+                                                 "connectFailed":  "Unable to connect to the realtime feed.",
+                                                 "loadSnapshot":  "Unable to load the latest recognition data."
+                                             },
+                                  "subscriberTarget":  "Realtime source: {target}"
+                              },
+                  "dashboard":  {
+                                    "subtitle":  "Health and quick stats",
+                                    "title":  "Dashboard",
+                                    "actions":  {
+                                                    "refreshNow":  "Refresh now",
+                                                    "autoRefresh":  "Auto refresh",
+                                                    "scheduled":  "Scheduled at {time}"
+                                                },
+                                    "throughput":  {
+                                                       "subtitle":  "Realtime throughput",
+                                                       "title":  "Events over time",
+                                                       "axis":  {
+                                                                    "time":  "Time",
+                                                                    "events":  "Events"
+                                                                },
+                                                       "legend":  {
+                                                                      "known":  "Known",
+                                                                      "unknown":  "Unknown",
+                                                                      "match":  "Match",
+                                                                      "total":  "Total"
+                                                                  }
+                                                   },
+                                    "topCameras":  {
+                                                       "subtitle":  "Top cameras",
+                                                       "title":  "Highest activity"
+                                                   },
+                                    "alerts":  {
+                                                   "subtitle":  "Alerts \u0026 triage",
+                                                   "title":  "Recent detections",
+                                                   "empty":  "No alerts within the selected range.",
+                                                   "knownPerson":  "Known person",
+                                                   "unknown":  "Unknown",
+                                                   "eventAt":  "{label} · {time}"
+                                               },
+                                    "cards":  {
+                                                  "totalEvents":  "Total events",
+                                                  "watchlistMatches":  "Watchlist matches",
+                                                  "unknownFaces":  "Unknown faces",
+                                                  "knownFaces":  "Known faces",
+                                                  "enabledCameras":  "Enabled cameras",
+                                                  "offlineCameras":  "Offline cameras",
+                                                  "activeCameras":  "Active cameras",
+                                                  "webhookFails":  "Webhook fails"
+                                              },
+                                    "systemHealth":  {
+                                                         "subtitle":  "System health",
+                                                         "title":  "System health",
+                                                         "badges":  {
+                                                                        "offline":  "{count} offline",
+                                                                        "warn":  "{count} warning",
+                                                                        "disabled":  "{count} disabled"
+                                                                    },
+                                                         "queueDepth":  "Queue depth",
+                                                         "ingest":  "Ingest",
+                                                         "webhook":  "Webhook",
+                                                         "dropReasons":  "Drop reasons",
+                                                         "noDrops":  "No drops in the selected range.",
+                                                         "latency":  "Latency",
+                                                         "matchP95":  "Match p95 (s)",
+                                                         "webhookSuccess":  "Webhook success",
+                                                         "webhookFail":  "Webhook failure"
+                                                     }
+                                },
+                  "faceStream":  {
+                                     "subtitle":  "Realtime feed",
+                                     "title":  "Face Stream",
+                                     "connection":  {
+                                                        "connecting":  "Connecting",
+                                                        "live":  "Live",
+                                                        "reconnecting":  "Reconnecting",
+                                                        "disconnected":  "Disconnected",
+                                                        "failed":  "Connection failed"
+                                                    },
+                                     "subscriberTarget":  "Subscriber target: {target}",
+                                     "tabs":  {
+                                                  "stream":  "Stream",
+                                                  "map":  "Map"
+                                              },
+                                     "known":  {
+                                                   "subtitle":  "Known identities",
+                                                   "title":  "Known faces",
+                                                   "empty":  "No known faces yet."
+                                               },
+                                     "unknown":  {
+                                                     "subtitle":  "Unknown detections",
+                                                     "title":  "Unknown faces",
+                                                     "empty":  "No unknown faces yet."
+                                                 },
+                                     "actions":  {
+                                                     "trackOnMap":  "Track on map",
+                                                     "createPerson":  "Create person"
+                                                 },
+                                  "validation":  {
+                                                      "codeRequired":  "Code is required.",
+                                                      "firstNameRequired":  "First name is required.",
+                                                      "lastNameRequired":  "Last name is required.",
+                                                      "fullNameRequired":  "Full name is required.",
+                                                      "personalIdRequired":  "Personal ID is required.",
+                                                      "cameraRequired":  "Camera is required.",
+                                                      "faceImageRequired":  "Face image is required."
+                                                  },
+                                     "crop":  {
+                                                  "selectArea":  "Select a crop area first.",
+                                                  "failed":  "Failed to crop image."
+                                              },
+                                     "errors":  {
+                                                    "loadSnapshot":  "Failed to load latest snapshot.",
+                                                    "connectFailed":  "Unable to connect to stream."
+                                                },
+                                     "notifications":  {
+                                                           "personCreated":  {
+                                                                                 "title":  "Person created",
+                                                                                 "message":  "Profile created successfully.",
+                                                                                 "retry":  "{message} Use Enroll to retry."
+                                                                             },
+                                                           "personCreatedEnrolled":  {
+                                                                                         "title":  "Person created and enrolled",
+                                                                                         "message":  "Face template stored."
+                                                                                     },
+                                                           "createFailed":  {
+                                                                                "title":  "Create failed"
+                                                                            },
+                                                           "faceImageError":  {
+                                                                                  "title":  "Face image error",
+                                                                                  "message":  "Failed to process face image."
+                                                                              },
+                                                           "enrollFailed":  {
+                                                                                "title":  "Enrollment failed",
+                                                                                "message":  "Failed to enroll face."
+                                                                            }
+                                                       },
+                                  "form":  {
+                                                "code":  "Code",
+                                                "category":  "Category",
+                                                  "listType":  {
+                                                                   "label":  "List type",
+                                                                   "placeholder":  "Select type",
+                                                                   "protect":  "Protect (no list)",
+                                                                   "white":  "White list",
+                                                                   "black":  "Black list"
+                                                               },
+                                                  "firstName":  "First name",
+                                                  "lastName":  "Last name",
+                                                  "gender":  "Gender",
+                                                  "age":  "Age",
+                                                  "remarks":  "Remarks",
+                                                  "placeholders":  {
+                                                                       "code":  "E001",
+                                                                       "category":  "Staff",
+                                                                       "firstName":  "Nguyen",
+                                                                       "lastName":  "An",
+                                                                       "gender":  "Male",
+                                                                       "age":  "30",
+                                                                       "remarks":  "Additional notes"
+                                                                   }
+                                              },
+                                     "enroll":  {
+                                                    "title":  "Enroll face now",
+                                                    "subtitle":  "Upload a face image to enroll immediately.",
+                                                    "noCamera":  "Add a camera before enrolling a face.",
+                                                    "camera":  "Camera",
+                                                    "cameraPlaceholder":  "Select camera",
+                                                    "noCameras":  "No cameras available",
+                                                    "faceImage":  "Face image (JPEG)",
+                                                    "faceImagePlaceholder":  "Choose image",
+                                                    "cropTitle":  "Crop face",
+                                                    "zoom":  "Zoom",
+                                                    "useOriginal":  "Use original",
+                                                    "croppedAlt":  "Cropped face",
+                                                    "sourceCamera":  "Source camera id (optional)",
+                                                    "sourceCameraPlaceholder":  "Camera ID",
+                                                    "storeFaceImage":  "Store face image with template"
+                                                },
+                                     "modals":  {
+                                                    "addPerson":  {
+                                                                      "title":  "Add person"
+                                                                  }
+                                                },
+                                     "map":  {
+                                                 "errors":  {
+                                                                "loadFailed":  "Unable to load trace on map."
+                                                            },
+                                                 "empty":  {
+                                                               "title":  "Pick a face to trace",
+                                                               "subtitle":  "Choose an event to start tracking on map."
+                                                           },
+                                                 "header":  {
+                                                                "subtitle":  "Realtime trace on map",
+                                                                "atCamera":  "{time} • {camera}"
+                                                            },
+                                                 "emptyResults":  "No trace points in the last 5 minutes."
+                                             }
+                                 },
+                  "faceTrace":  {
+                                    "subtitle":  "Tracking and search",
+                                    "title":  "Face Trace",
+                                    "tabs":  {
+                                                 "events":  "Events",
+                                                 "map":  "Map"
+                                             },
+                                    "badges":  {
+                                                   "search":  "Search",
+                                                   "trace":  "Trace"
+                                               },
+                                    "filters":  {
+                                                    "timeAndCameras":  "Time \u0026 cameras",
+                                                    "toggleTimeAndCameras":  "Toggle time \u0026 cameras",
+                                                    "from":  "From",
+                                                    "to":  "To",
+                                                    "allCameras":  "All cameras",
+                                                    "cameras":  "Cameras",
+                                                    "selectCameras":  "Select cameras",
+                                                    "searchTitle":  "Search filters",
+                                                    "toggleSearch":  "Toggle search filters",
+                                                    "target":  "Target",
+                                                    "targets":  {
+                                                                    "all":  "All targets",
+                                                                    "known":  "Known",
+                                                                    "unknown":  "Unknown",
+                                                                    "whitelist":  "Whitelist",
+                                                                    "blacklist":  "Blacklist",
+                                                                    "protect":  "Protect",
+                                                                    "undefined":  "Undefined"
+                                                                },
+                                                    "gender":  {
+                                                                   "label":  "Gender",
+                                                                   "all":  "All",
+                                                                   "male":  "Male",
+                                                                   "female":  "Female"
+                                                               },
+                                                    "mask":  {
+                                                                 "label":  "Mask",
+                                                                 "all":  "All",
+                                                                 "masked":  "Masked",
+                                                                 "unmasked":  "Unmasked"
+                                                             },
+                                                    "ageMin":  "Min age",
+                                                    "ageMax":  "Max age",
+                                                    "scoreMin":  "Min score",
+                                                    "similarityMin":  "Min similarity",
+                                                    "personSearch":  "Person search",
+                                                    "personSearchPlaceholder":  "Search by name or code",
+                                                    "category":  "Category",
+                                                    "categoryPlaceholder":  "Filter by category",
+                                                    "hasFeature":  "Only traceable events",
+                                                    "pageSize":  "Page size"
+                                                },
+                                    "actions":  {
+                                                    "search":  "Search",
+                                                    "traceFromEvent":  "Trace from event",
+                                                    "viewOnMap":  "View on map",
+                                                    "createPerson":  "Create person"
+                                                },
+                                    "validation":  {
+                                                       "codeRequired":  "Code is required.",
+                                                       "firstNameRequired":  "First name is required.",
+                                                       "lastNameRequired":  "Last name is required.",
+                                                       "cameraRequired":  "Camera is required.",
+                                                       "faceImageRequired":  "Face image is required."
+                                                   },
+                                    "crop":  {
+                                                 "selectArea":  "Select a crop area first.",
+                                                 "failed":  "Failed to crop image."
+                                             },
+                                    "notifications":  {
+                                                          "searchFailed":  {
+                                                                               "title":  "Search failed",
+                                                                               "message":  "Unable to load search results."
+                                                                           },
+                                                          "selectPerson":  {
+                                                                               "title":  "Select person",
+                                                                               "message":  "Choose a person to trace."
+                                                                           },
+                                                          "traceFailed":  {
+                                                                              "title":  "Trace failed",
+                                                                              "person":  "Unable to trace person.",
+                                                                              "image":  "Unable to trace image.",
+                                                                              "event":  "Unable to trace event."
+                                                                          },
+                                                          "uploadImage":  {
+                                                                              "title":  "Upload image",
+                                                                              "message":  "Choose a face image to trace."
+                                                                          },
+                                                          "personCreated":  {
+                                                                                "title":  "Person created",
+                                                                                "message":  "Profile created successfully.",
+                                                                                "retry":  "{message} Use Enroll to retry."
+                                                                            },
+                                                          "personCreatedEnrolled":  {
+                                                                                        "title":  "Person created and enrolled",
+                                                                                        "message":  "Face template stored."
+                                                                                    },
+                                                          "createFailed":  {
+                                                                               "title":  "Create failed"
+                                                                           },
+                                                          "faceImageError":  {
+                                                                                 "title":  "Face image error",
+                                                                                 "message":  "Failed to process face image."
+                                                                             },
+                                                          "enrollFailed":  {
+                                                                               "title":  "Enrollment failed",
+                                                                               "message":  "Failed to enroll face."
+                                                                           }
+                                                      },
+                                    "traceActions":  {
+                                                         "title":  "Trace actions",
+                                                         "toggle":  "Toggle trace actions",
+                                                         "similarity":  {
+                                                                            "label":  "Similarity threshold",
+                                                                            "desc":  "Higher = stricter match"
+                                                                        },
+                                                         "source":  {
+                                                                        "label":  "Trace source",
+                                                                        "person":  "Person",
+                                                                        "image":  "Image"
+                                                                    },
+                                                         "person":  {
+                                                                        "label":  "Trace by person",
+                                                                        "placeholder":  "Select person"
+                                                                    },
+                                                         "image":  {
+                                                                       "label":  "Upload image",
+                                                                       "placeholder":  "Choose face image"
+                                                                   },
+                                                         "crop":  {
+                                                                      "title":  "Crop face",
+                                                                      "zoom":  "Zoom",
+                                                                      "useOriginal":  "Use original",
+                                                                      "alt":  "Cropped face"
+                                                                  },
+                                                         "run":  {
+                                                                     "person":  "Trace person",
+                                                                     "image":  "Trace image"
+                                                                 },
+                                                         "detect":  {
+                                                                        "action":  "Detect face",
+                                                                        "faceAlt":  "Detected face",
+                                                                        "noFace":  "No face detected.",
+                                                                        "noImage":  "Choose an image before detecting.",
+                                                                        "selected":  "Face selected",
+                                                                        "results":  "Detected faces",
+                                                                        "failed":  "Face detection failed."
+                                                                    }
+                                                     },
+                                    "results":  {
+                                                    "subtitle":  {
+                                                                     "search":  "Filtered events from storage",
+                                                                     "trace":  "Similarity trace results"
+                                                                 },
+                                                    "title":  "Results",
+                                                    "loading":  "Loading",
+                                                    "empty":  "No results yet. Apply filters or run a trace action."
+                                                },
+                                    "form":  {
+                                                 "code":  "Code",
+                                                 "category":  "Category",
+                                                 "listType":  {
+                                                                  "label":  "List type",
+                                                                  "placeholder":  "Select type",
+                                                                  "protect":  "Protect (no list)",
+                                                                  "white":  "White list",
+                                                                  "black":  "Black list"
+                                                              },
+                                                 "firstName":  "First name",
+                                                 "lastName":  "Last name",
+                                                 "gender":  "Gender",
+                                                 "age":  "Age",
+                                                 "remarks":  "Remarks",
+                                                 "placeholders":  {
+                                                                      "code":  "E001",
+                                                                      "category":  "Staff",
+                                                                      "firstName":  "Nguyen",
+                                                                      "lastName":  "An",
+                                                                      "gender":  "Male",
+                                                                      "age":  "30",
+                                                                      "remarks":  "Additional notes"
+                                                                  }
+                                             },
+                                    "enroll":  {
+                                                   "title":  "Enroll face now",
+                                                   "subtitle":  "Upload a face image to enroll immediately.",
+                                                   "noCamera":  "Add a camera before enrolling a face.",
+                                                   "camera":  "Camera",
+                                                   "cameraPlaceholder":  "Select camera",
+                                                   "noCameras":  "No cameras available",
+                                                   "faceImage":  "Face image (JPEG)",
+                                                   "faceImagePlaceholder":  "Choose image",
+                                                   "cropTitle":  "Crop face",
+                                                   "zoom":  "Zoom",
+                                                   "useOriginal":  "Use original",
+                                                   "croppedAlt":  "Cropped face",
+                                                   "sourceCamera":  "Source camera id (optional)",
+                                                   "sourceCameraPlaceholder":  "Camera ID",
+                                                   "storeFaceImage":  "Store face image with template"
+                                               },
+                                    "modals":  {
+                                                   "addPerson":  {
+                                                                     "title":  "Add person"
+                                                                 }
+                                               }
+                                },
+                  "maps":  {
+                               "subtitle":  "Create maps and place cameras for tracking.",
+                               "title":  "Map layouts",
+                               "badges":  {
+                                              "unsaved":  "Unsaved"
+                                          },
+                               "actions":  {
+                                               "newMap":  "New map",
+                                               "savePositions":  "Save positions"
+                                           },
+                               "sidebar":  {
+                                               "mapsTitle":  "Maps",
+                                               "searchMapPlaceholder":  "Search map by name",
+                                               "emptyMaps":  "No maps yet. Create one to start.",
+                                               "camerasTitle":  "Cameras",
+                                               "camerasHint":  "Drag cameras onto the map or click to select for geo placement.",
+                                               "searchCameraPlaceholder":  "Search by code or IP",
+                                               "unnamedCamera":  "Unnamed camera",
+                                               "cameraIp":  "IP: {ip}",
+                                               "badges":  {
+                                                              "placed":  "Placed"
+                                                          }
+                                           },
+                               "panel":  {
+                                             "geoHint":  "Select a camera, then click the map to place it.",
+                                             "imageHint":  "Image map with drag and drop placement.",
+                                             "noMapSelected":  "No map selected",
+                                             "uploadImage":  "Upload map image",
+                                             "mapAlt":  "map"
+                                         },
+                               "geo":  {
+                                           "missingStyle":  "Set Map:GeoStyleUrl in appsettings to enable Geo map view."
+                                       },
+                               "empty":  "Select or create a map to start placing cameras.",
+                               "fields":  {
+                                              "name":  "Name",
+                                              "type":  "Type",
+                                              "parent":  "Parent map"
+                                          },
+                               "placeholders":  {
+                                                    "mapName":  "Floor 1",
+                                                    "rootMap":  "Root map"
+                                                },
+                               "types":  {
+                                             "image":  "Image",
+                                             "geo":  "Geo",
+                                             "imageLabel":  "Image floorplan",
+                                             "geoLabel":  "Geo map (MapLibre)"
+                                         },
+                               "modals":  {
+                                              "create":  {
+                                                             "title":  "Create map"
+                                                         },
+                                              "edit":  {
+                                                           "title":  "Edit map"
+                                                       },
+                                              "delete":  {
+                                                             "title":  "Delete map",
+                                                             "message":  "Delete map {name}? This will remove camera placements for this map."
+                                                         }
+                                          },
+                               "notifications":  {
+                                                     "create":  {
+                                                                    "title":  "Map created",
+                                                                    "message":  "Map has been created."
+                                                                },
+                                                     "createFailed":  {
+                                                                          "title":  "Create failed"
+                                                                      },
+                                                     "update":  {
+                                                                    "title":  "Map updated",
+                                                                    "message":  "{name} updated."
+                                                                },
+                                                     "updateFailed":  {
+                                                                          "title":  "Update failed"
+                                                                      },
+                                                     "delete":  {
+                                                                    "title":  "Map deleted",
+                                                                    "message":  "Map has been removed."
+                                                                },
+                                                     "deleteFailed":  {
+                                                                          "title":  "Delete failed"
+                                                                      },
+                                                     "imageUploaded":  {
+                                                                           "title":  "Map image uploaded",
+                                                                           "message":  "Updated {name}."
+                                                                       },
+                                                     "uploadFailed":  {
+                                                                          "title":  "Upload failed"
+                                                                      },
+                                                     "positionsSaved":  {
+                                                                            "title":  "Positions saved",
+                                                                            "message":  "Camera positions updated."
+                                                                        },
+                                                     "positionsFailed":  {
+                                                                             "title":  "Save failed"
+                                                                         }
+                                                 }
+                           },
+                  "activeGuard":  {
+                                      "subtitle":  "Active Guard camera inventory",
+                                      "title":  "Inventory (read-only)",
+                                      "search":  {
+                                                     "placeholder":  "Search by ID, name, model or IP"
+                                                 },
+                                      "table":  {
+                                                    "id":  "ID",
+                                                    "name":  "Name",
+                                                    "model":  "Model",
+                                                    "ip":  "IP",
+                                                    "actions":  "Actions"
+                                                },
+                                      "actions":  {
+                                                      "copyId":  "Copy ID"
+                                                  },
+                                      "notifications":  {
+                                                            "copy":  {
+                                                                         "title":  "Copied",
+                                                                         "message":  "Camera ID {id} copied to clipboard."
+                                                                     },
+                                                            "copyFailed":  {
+                                                                               "title":  "Copy failed",
+                                                                               "message":  "Clipboard access is not available."
+                                                                           }
+                                                        }
+                                  },
+                  "subscribers":  {
+                                      "subtitle":  "Webhook delivery endpoints",
+                                      "title":  "Subscribers",
+                                      "actions":  {
+                                                      "add":  "Add subscriber"
+                                                  },
+                                      "validation":  {
+                                                         "nameRequired":  "Name is required",
+                                                         "endpointRequired":  "Endpoint is required"
+                                                     },
+                                      "notifications":  {
+                                                            "create":  {
+                                                                           "title":  "Subscriber saved",
+                                                                           "message":  "Webhook destination added."
+                                                                       },
+                                                            "createFailed":  {
+                                                                                 "title":  "Save failed"
+                                                                             },
+                                                            "update":  {
+                                                                           "title":  "Subscriber updated",
+                                                                           "message":  "Webhook destination saved."
+                                                                       },
+                                                            "updateFailed":  {
+                                                                                 "title":  "Update failed"
+                                                                             },
+                                                            "delete":  {
+                                                                           "title":  "Subscriber deleted",
+                                                                           "message":  "Webhook destination removed."
+                                                                       },
+                                                            "deleteFailed":  {
+                                                                                 "title":  "Delete failed"
+                                                                             }
+                                                        },
+                                      "modals":  {
+                                                     "delete":  {
+                                                                    "title":  "Delete subscriber?",
+                                                                    "message":  "This will stop delivering events to {endpoint}."
+                                                                },
+                                                     "create":  {
+                                                                    "title":  "Add subscriber"
+                                                                },
+                                                     "edit":  {
+                                                                  "title":  "Edit subscriber"
+                                                              }
+                                                 },
+                                      "table":  {
+                                                    "name":  "Name",
+                                                    "endpoint":  "Endpoint",
+                                                    "status":  "Status",
+                                                    "created":  "Created",
+                                                    "actions":  "Actions"
+                                                },
+                                      "form":  {
+                                                   "name":  "Name",
+                                                   "endpointUrl":  "Endpoint URL",
+                                                   "enabled":  "Enable subscriber",
+                                                   "placeholders":  {
+                                                                        "name":  "Security team",
+                                                                        "endpointUrl":  "https://example.com/webhook"
+                                                                    }
+                                               }
+                                  },
+                  "cameras":  {
+                                  "subtitle":  "RTSP credentials and profiles",
+                                  "title":  "Cameras",
+                                  "search":  {
+                                                 "placeholder":  "Search by ID, code, IP, series, model..."
+                                             },
+                                  "actions":  {
+                                                  "scan":  "Scan cameras",
+                                                  "add":  "Add camera",
+                                                  "testRtsp":  "Test RTSP"
+                                              },
+                                  "validation":  {
+                                                     "cameraIdRequired":  "Camera ID is required",
+                                                     "ipRequired":  "IP address is required",
+                                                     "profileRequired":  "Profile is required",
+                                                     "pathRequired":  "Path is required"
+                                                 },
+                                  "notifications":  {
+                                                        "save":  {
+                                                                     "title":  "Camera saved",
+                                                                     "message":  "RTSP credentials have been stored."
+                                                                 },
+                                                        "saveFailed":  {
+                                                                           "title":  "Save failed"
+                                                                       },
+                                                        "delete":  {
+                                                                       "title":  "Camera deleted",
+                                                                       "message":  "The record was removed."
+                                                                   },
+                                                        "deleteFailed":  {
+                                                                             "title":  "Delete failed"
+                                                                         },
+                                                        "rtsp":  {
+                                                                     "success":  {
+                                                                                     "title":  "RTSP reachable",
+                                                                                     "message":  "Metadata stream responded for {id}."
+                                                                                 },
+                                                                     "failure":  {
+                                                                                     "title":  "RTSP failed",
+                                                                                     "message":  "No metadata detected yet for {id}."
+                                                                                 }
+                                                                 },
+                                                        "rtspError":  {
+                                                                          "title":  "RTSP test failed"
+                                                                      },
+                                                        "scan":  {
+                                                                     "empty":  {
+                                                                                   "title":  "No cameras discovered",
+                                                                                   "message":  "Ensure the camera and server are on the same network."
+                                                                               }
+                                                                 },
+                                                        "scanFailed":  {
+                                                                           "title":  "Scan failed"
+                                                                       },
+                                                        "bulk":  {
+                                                                     "success":  {
+                                                                                     "title":  "Cameras added",
+                                                                                     "message":  "{success} cameras added."
+                                                                                 },
+                                                                     "partial":  {
+                                                                                     "title":  "Cameras added with issues",
+                                                                                     "message":  "{success} added, {failed} failed."
+                                                                                 },
+                                                                     "noneSelected":  {
+                                                                                          "title":  "No cameras selected",
+                                                                                          "message":  "Select at least one camera to add."
+                                                                                      },
+                                                                     "invalid":  {
+                                                                                     "title":  "No valid cameras",
+                                                                                     "message":  "Selected cameras are missing IP addresses."
+                                                                                 }
+                                                                 },
+                                                        "bulkFailed":  {
+                                                                           "title":  "Bulk add failed"
+                                                                       }
+                                                    },
+                                  "modals":  {
+                                                 "delete":  {
+                                                                "title":  "Delete camera?",
+                                                                "message":  "This will remove camera {id}. The ingestion worker will stop on next refresh."
+                                                            },
+                                                 "create":  {
+                                                                "title":  "Add camera"
+                                                            },
+                                                 "edit":  {
+                                                              "title":  "Edit camera"
+                                                          }
+                                             },
+                                  "table":  {
+                                                "id":  "ID",
+                                                "code":  "Code",
+                                                "ip":  "IP",
+                                                "series":  "Series",
+                                                "model":  "Model",
+                                                "user":  "User",
+                                                "profile":  "Profile",
+                                                "path":  "Path",
+                                                "status":  "Status",
+                                                "updated":  "Updated",
+                                                "actions":  "Actions"
+                                            },
+                                  "badges":  {
+                                                 "secret":  "Secret",
+                                                 "noSecret":  "No secret"
+                                             },
+                                  "scan":  {
+                                               "title":  "Discover cameras",
+                                               "range":  {
+                                                             "title":  "IP range filter",
+                                                             "subtitle":  "Optional: limit discovery to an IPv4 range.",
+                                                             "from":  "From IP",
+                                                             "to":  "To IP",
+                                                             "fromPlaceholder":  "192.168.1.10",
+                                                             "toPlaceholder":  "192.168.1.254",
+                                                             "found":  "{count} found"
+                                                         },
+                                               "discovered":  {
+                                                                  "title":  "Discovered i-PRO cameras",
+                                                                  "subtitle":  "Select cameras to add in bulk or prefill the form.",
+                                                                  "ready":  "{count} ready",
+                                                                  "existing":  "{count} existing",
+                                                                  "selected":  "{count} selected",
+                                                                  "empty":  "No i-PRO cameras found.",
+                                                                  "selectAll":  "Select all cameras",
+                                                                  "cameraIndex":  "camera {index}",
+                                                                  "selectOne":  "Select {name}"
+                                                              },
+                                               "table":  {
+                                                             "name":  "Name",
+                                                             "series":  "Series",
+                                                             "model":  "Model",
+                                                             "ip":  "IP",
+                                                             "mac":  "MAC",
+                                                             "deviceId":  "Device ID",
+                                                             "status":  "Status",
+                                                             "actions":  "Actions"
+                                                         },
+                                               "badges":  {
+                                                              "alreadyAdded":  "Already added",
+                                                              "ready":  "Ready",
+                                                              "missingIp":  "Missing IP"
+                                                          },
+                                               "actions":  {
+                                                               "prefill":  "Prefill camera form",
+                                                               "alreadyInSystem":  "Already in system",
+                                                               "missingIp":  "Missing IP address"
+                                                           }
+                                           },
+                                  "bulk":  {
+                                               "title":  "Bulk add",
+                                               "subtitle":  "Apply shared RTSP settings to selected cameras.",
+                                               "actions":  {
+                                                               "addSelected":  "Add selected"
+                                                           },
+                                               "enabled":  "Enable ingestion for added cameras"
+                                           },
+                                  "form":  {
+                                               "cameraId":  "Camera ID",
+                                               "code":  "Camera code",
+                                               "ipAddress":  "IP address",
+                                               "series":  "Camera series",
+                                               "model":  "Camera model",
+                                               "rtspUsername":  "RTSP username",
+                                               "rtspPassword":  "RTSP password",
+                                               "rtspProfile":  "Profile",
+                                               "rtspPath":  "Path",
+                                               "enabled":  "Enable ingestion",
+                                               "placeholders":  {
+                                                                    "cameraId":  "D42DC52A966E",
+                                                                    "code":  "E001",
+                                                                    "ipAddress":  "192.168.100.58:554",
+                                                                    "series":  "x / s / u",
+                                                                    "model":  "Model name",
+                                                                    "rtspUsername":  "admin",
+                                                                    "rtspPassword":  "Password",
+                                                                    "rtspPasswordKeep":  "Leave blank to keep existing",
+                                                                    "rtspProfile":  "def_profile1",
+                                                                    "rtspPath":  "/ONVIF/MediaInput"
+                                                                }
+                                           }
+                              },
+                  "persons":  {
+                                  "subtitle":  "Registered identities and face templates",
+                                  "title":  "Persons",
+                                  "actions":  {
+                                                  "add":  "Add person",
+                                                  "scan":  "Scan VNeID",
+                                                  "enrollFace":  "Enroll face",
+                                                  "templates":  "Templates",
+                                                  "deactivateTemplate":  "Delete"
+                                              },
+                                  "search":  {
+                                                 "placeholder":  "Search by code, name, or category"
+                                             },
+                                  "table":  {
+                                                "face":  "Face",
+                                                "code":  "Code",
+                                                "name":  "Name",
+                                                "gender":  "Gender",
+                                                "age":  "Age",
+                                                "category":  "Category",
+                                                "listType":  "List type",
+                                                "enroll":  "Enroll",
+                                                "status":  "Status",
+                                                "updated":  "Updated",
+                                                "actions":  "Actions"
+                                            },
+                                  "status":  {
+                                                 "enrolled":  "Enrolled",
+                                                 "notEnrolled":  "Not enrolled"
+                                             },
+                                  "listType":  {
+                                                   "protectOption":  "Protect (no list)",
+                                                   "protect":  "Protect",
+                                                   "white":  "White list",
+                                                   "black":  "Black list"
+                                               },
+                                  "validation":  {
+                                                     "codeRequired":  "Code is required.",
+                                                     "firstNameRequired":  "First name is required.",
+                                                     "lastNameRequired":  "Last name is required.",
+                                                     "cameraRequired":  "Camera is required.",
+                                                     "faceImageRequired":  "Face image is required."
+                                                 },
+                                  "crop":  {
+                                               "selectArea":  "Select a crop area first.",
+                                               "failed":  "Failed to crop image."
+                                           },
+                                  "modals":  {
+                                                 "addPerson":  {
+                                                                   "title":  "Add person"
+                                                               },
+                                                 "editPerson":  {
+                                                                    "title":  "Edit person"
+                                                                }
+                                             },
+                                  "enrollmentStatus":  {
+                                                           "label":  "Enrollment status"
+                                                       },
+                                  "form":  {
+                                               "code":  "Code",
+                                               "category":  "Category",
+                                               "listType":  {
+                                                                "label":  "List type",
+                                                                "placeholder":  "Select type"
+                                                            },
+                                                "firstName":  "First name",
+                                                "lastName":  "Last name",
+                                                "fullName":  "Full name",
+                                                "personalId":  "Personal ID",
+                                                "documentNumber":  "Previous personal ID",
+                                                "gender":  "Gender",
+                                               "age":  "Age",
+                                               "dateOfBirth":  "Date of birth",
+                                               "dateOfIssue":  "Date of issue",
+                                               "address":  "Address",
+                                               "rawQrPayload":  "Raw QR payload",
+                                               "remarks":  "Remarks",
+                                               "placeholders":  {
+                                                                     "code":  "E001",
+                                                                     "category":  "Staff",
+                                                                     "firstName":  "Nguyen",
+                                                                     "lastName":  "An",
+                                                                     "fullName":  "Nguyen Van A",
+                                                                     "personalId":  "Personal ID from CCCD / VNeID",
+                                                                     "documentNumber":  "Previous ID / old national ID",
+                                                                     "gender":  "Male",
+                                                                    "age":  "30",
+                                                                    "address":  "Address from CCCD / VNeID",
+                                                                    "rawQrPayload":  "Raw QR payload",
+                                                                    "remarks":  "Additional notes"
+                                                                }
+                                           },
+                                  "enroll":  {
+                                                 "title":  "Enroll face now",
+                                                 "subtitle":  "Upload a face image to enroll immediately.",
+                                                 "noCamera":  "Add a camera before enrolling a face.",
+                                                 "camera":  "Camera",
+                                                 "cameraPlaceholder":  "Select camera",
+                                                 "noCameras":  "No cameras available",
+                                                 "faceImage":  "Face image (JPEG)",
+                                                 "faceImagePlaceholder":  "Choose image",
+                                                 "cropTitle":  "Crop face",
+                                                 "zoom":  "Zoom",
+                                                 "useOriginal":  "Use original",
+                                                 "croppedAlt":  "Cropped face",
+                                                 "sourceCamera":  "Source camera id (optional)",
+                                                 "sourceCameraPlaceholder":  "Camera ID",
+                                                 "storeFaceImage":  "Store face image with template",
+                                                 "detect":  {
+                                                                "action":  "Detect faces",
+                                                                "results":  "Detected faces",
+                                                                "noFace":  "No faces detected.",
+                                                                "noImage":  "Choose an image first.",
+                                                                "failed":  "Face detection failed.",
+                                                                "selected":  "Selected",
+                                                                "faceAlt":  "Detected face"
+                                                            },
+                                                 "modalTitle":  "Enroll face",
+                                                 "modalTitleWithName":  "Enroll face - {name}",
+                                                 "action":  "Enroll",
+                                                 "enrolledFaceAlt":  "Enrolled face"
+                                             },
+                                  "templates":  {
+                                                    "title":  "Templates",
+                                                    "titleWithName":  "Templates - {name}",
+                                                    "total":  "Total templates: {total}",
+                                                    "empty":  "No templates enrolled yet.",
+                                                    "fields":  {
+                                                                   "version":  "Version",
+                                                                   "l2Norm":  "L2 Norm",
+                                                                   "source":  "Source",
+                                                                   "updated":  "Updated",
+                                                                   "created":  "Created"
+                                                               }
+                                                },
+                                  "confirmations":  {
+                                                        "delete":  {
+                                                                       "title":  "Delete person?",
+                                                                       "message":  "This will disable {name} ({code})."
+                                                                   },
+                                                        "templateDeactivate":  {
+                                                                                   "title":  "Delete template?",
+                                                                                   "message":  "This will permanently delete template {id} for {name}.",
+                                                                                   "confirm":  "Delete"
+                                                                               }
+                                                    },
+                                  "notifications":  {
+                                                        "created":  {
+                                                                        "title":  "Person created",
+                                                                        "message":  "Profile created successfully."
+                                                                    },
+                                                        "createdEnrolled":  {
+                                                                                "title":  "Person created and enrolled",
+                                                                                "message":  "Face template stored."
+                                                                            },
+                                                        "createdPartial":  {
+                                                                               "title":  "Person created",
+                                                                               "message":  "{message} Use Enroll to retry."
+                                                                           },
+                                                        "createFailed":  {
+                                                                             "title":  "Create failed",
+                                                                             "message":  "Failed to create person."
+                                                                         },
+                                                        "updated":  {
+                                                                        "title":  "Person saved",
+                                                                        "message":  "Profile updated successfully."
+                                                                    },
+                                                        "updateFailed":  {
+                                                                             "title":  "Save failed",
+                                                                             "message":  "Failed to save person."
+                                                                         },
+                                                        "deleted":  {
+                                                                        "title":  "Person deleted",
+                                                                        "message":  "The record was disabled."
+                                                                    },
+                                                        "deleteFailed":  {
+                                                                             "title":  "Delete failed",
+                                                                             "message":  "Failed to delete person."
+                                                                         },
+                                                        "enrollSuccess":  {
+                                                                              "title":  "Enrollment complete",
+                                                                              "message":  "Face template stored."
+                                                                          },
+                                                        "enrollFailed":  {
+                                                                             "title":  "Enrollment failed",
+                                                                             "message":  "Failed to enroll face."
+                                                                         },
+                                                        "templateRemoved":  {
+                                                                                "title":  "Template removed",
+                                                                                "message":  "Face template deleted."
+                                                                            },
+                                                        "templateRemoveFailed":  {
+                                                                                     "title":  "Delete failed",
+                                                                                     "message":  "Failed to remove template."
+                                                                                 },
+                                                        "templateUpdateFailed":  {
+                                                                                     "title":  "Update failed",
+                                                                                     "message":  "Failed to update template status."
+                                                                                 },
+                                                        "selectPerson":  {
+                                                                             "title":  "Select person",
+                                                                             "message":  "Choose a person to enroll."
+                                                                         },
+                                                        "noSystemCamera":  {
+                                                                                "title":  "No system camera available",
+                                                                                "message":  "QR data was applied to the form, but face enroll still requires at least one configured system camera."
+                                                                         }
+                                                    },
+                                  "errors":  {
+                                                 "noPersonSelected":  "No person selected."
+                                             },
+                                  "scan":  {
+                                               "title":  "Scan VNeID",
+                                               "sourceLabel":  "Scan source",
+                                               "useInForm":  "Use in form",
+                                               "redo":  "Redo",
+                                               "personPanel":  "Parsed person data",
+                                               "facePanel":  "Detected face",
+                                               "faceAlt":  "Detected face",
+                                               "faceEmpty":  "No face captured yet.",
+                                               "sources":  {
+                                                               "system":  "System IP camera",
+                                                               "local":  "Internal / USB camera"
+                                                           },
+                                               "fields":  {
+                                                              "code":  "Code",
+                                                              "personalId":  "Personal ID",
+                                                              "documentNumber":  "Document number",
+                                                              "fullName":  "Full name",
+                                                              "gender":  "Gender",
+                                                              "dateOfBirth":  "Date of birth",
+                                                              "dateOfIssue":  "Date of issue",
+                                                              "age":  "Age",
+                                                              "address":  "Address",
+                                                              "rawQrPayload":  "Raw QR payload"
+                                                          },
+                                               "system":  {
+                                                              "camera":  "System camera",
+                                                              "noCamera":  "No configured system cameras.",
+                                                              "scanNow":  "Scan now",
+                                                              "snapshot":  "Snapshot"
+                                                          },
+                                               "local":  {
+                                                             "camera":  "Internal / USB camera",
+                                                             "noDevice":  "No local camera devices found.",
+                                                             "unnamedCamera":  "Camera {index}",
+                                                             "enableCamera":  "Enable camera",
+                                                             "stopCamera":  "Stop camera",
+                                                             "start":  "Start",
+                                                             "preview":  "Live preview",
+                                                             "previewOn":  "Camera enabled",
+                                                             "previewOff":  "Camera stopped",
+                                                             "step1Title":  "Step 1 · Read QR",
+                                                             "step1Hint":  "Present the QR code first.",
+                                                             "step1Done":  "QR detected. Person data is ready.",
+                                                             "step1Complete":  "Completed",
+                                                             "step2Title":  "Step 2 · Capture live face",
+                                                             "step2Hint":  "After QR is complete, keep the live face at the center of the preview.",
+                                                             "step2Done":  "Live face captured.",
+                                                             "step2Complete":  "Completed",
+                                                             "unsupported":  "This browser does not support camera access.",
+                                                             "enableFailed":  "Unable to enable camera.",
+                                                             "enableFirst":  "Enable the camera first.",
+                                                             "faceFallback":  "Native FaceDetector is unavailable, so the app is using a strict center-capture fallback.",
+                                                             "faceUnavailable":  "This browser cannot reliably capture a live face automatically. Keep your face centered and try again."
+                                                         },
+                                               "errors":  {
+                                                              "qrFailed":  "QR scan failed.",
+                                                              "faceFailed":  "Face capture failed.",
+                                                              "systemFailed":  "System camera scan failed."
+                                                          },
+                                               "notifications":  {
+                                                                     "noSystemCamera":  {
+                                                                                             "title":  "No system camera available",
+                                                                                             "message":  "QR data was applied to the form, but face enroll still requires at least one configured system camera."
+                                                                                         }
+                                                                 }
+                                             }
+                              },
+                  "settings":  {
+                                   "subtitle":  "Control how alarms are delivered to subscribers",
+                                   "title":  "Settings",
+                                   "badge":  {
+                                                 "enabled":  "{count} enabled"
+                                             },
+                                   "validation":  {
+                                                      "similarityRange":  "Similarity must be between 0 and 1.",
+                                                      "scoreRange":  "Score must be between 0 and 1.",
+                                                      "retentionDays":  "Retention days must be \u003e= 0.",
+                                                      "invalidUtc":  "Invalid UTC timestamp.",
+                                                      "maxEvents":  "Max events must be \u003e= 1.",
+                                                      "invalidJsonMap":  "Invalid JSON map."
+                                                  },
+                                   "notifications":  {
+                                                         "alarmSaved":  {
+                                                                            "title":  "Alarm settings saved",
+                                                                            "message":  "Alarm delivery rules updated."
+                                                                        },
+                                                         "matchingSaved":  {
+                                                                               "title":  "Matching settings saved",
+                                                                               "message":  "Matching thresholds updated."
+                                                                           },
+                                                         "bestshotSaved":  {
+                                                                               "title":  "Bestshot settings saved",
+                                                                               "message":  "Storage path and retention updated."
+                                                                           },
+                                                         "saveFailed":  {
+                                                                            "title":  "Save failed"
+                                                                        },
+                                                         "reembedFinished":  {
+                                                                                 "title":  "Re-embed finished",
+                                                                                 "message":  "Processed {processed} events, created {created}."
+                                                                             },
+                                                         "reembedFailed":  {
+                                                                               "title":  "Re-embed failed"
+                                                                           }
+                                                     },
+                                   "alarm":  {
+                                                 "title":  "Alarm delivery filters",
+                                                 "subtitle":  "Choose which face categories trigger webhook delivery.",
+                                                 "badge":  "Webhooks",
+                                                 "filters":  {
+                                                                 "white":  {
+                                                                               "label":  "White list",
+                                                                               "description":  "Known people marked as White list."
+                                                                           },
+                                                                 "black":  {
+                                                                               "label":  "Black list",
+                                                                               "description":  "Known people marked as Black list."
+                                                                           },
+                                                                 "protect":  {
+                                                                                 "label":  "Protect",
+                                                                                 "description":  "Known people without list type (access-rule based)."
+                                                                             },
+                                                                 "undefined":  {
+                                                                                   "label":  "Undefined",
+                                                                                   "description":  "Unknown people not in watchlist."
+                                                                               }
+                                                             }
+                                             },
+                                   "bestshot":  {
+                                                    "title":  "Bestshot storage",
+                                                    "subtitle":  "Configure where bestshots are stored and how long events are retained.",
+                                                    "badge":  "Storage",
+                                                    "folder":  {
+                                                                   "title":  "Bestshot folder",
+                                                                   "subtitle":  "Relative paths are based on the API content root.",
+                                                                   "placeholder":  "bestshots"
+                                                               },
+                                                    "retention":  {
+                                                                      "title":  "Retention (days)",
+                                                                      "subtitle":  "Applies to bestshot files and stored face events."
+                                                                  }
+                                                },
+                                   "matching":  {
+                                                    "title":  "Matching thresholds",
+                                                    "subtitle":  "Tune similarity and score thresholds for matching.",
+                                                    "badge":  "Matching",
+                                                    "similarity":  {
+                                                                       "title":  "Similarity",
+                                                                       "subtitle":  "Minimum similarity to classify as known."
+                                                                   },
+                                                    "score":  {
+                                                                  "title":  "Score",
+                                                                  "subtitle":  "Ignore face events below this score."
+                                                              }
+                                                },
+                                   "reembed":  {
+                                                   "title":  "Re-embed face events",
+                                                   "subtitle":  "Rebuild vectors from stored bestshots across cameras.",
+                                                   "badge":  "Maintenance",
+                                                   "fromUtc":  {
+                                                                   "title":  "From UTC",
+                                                                   "subtitle":  "Example: 2026-01-01T00:00:00Z",
+                                                                   "placeholder":  "2026-01-01T00:00:00Z"
+                                                               },
+                                                   "toUtc":  {
+                                                                 "title":  "To UTC",
+                                                                 "subtitle":  "Example: 2026-01-02T00:00:00Z",
+                                                                 "placeholder":  "2026-01-02T00:00:00Z"
+                                                             },
+                                                   "cameraIds":  {
+                                                                     "title":  "Camera IDs (optional)",
+                                                                     "subtitle":  "Comma or space separated. Leave empty for all cameras.",
+                                                                     "placeholder":  "cam-1, cam-2"
+                                                                 },
+                                                   "targetVersion":  {
+                                                                         "title":  "Target feature version",
+                                                                         "subtitle":  "Optional override for the vector model version.",
+                                                                         "placeholder":  "0.1"
+                                                                     },
+                                                   "featureMap":  {
+                                                                      "title":  "Feature version map (optional)",
+                                                                      "subtitle":  "JSON map: {example}.",
+                                                                      "placeholder":  "{\"cam-1\":\"0.1\",\"cam-2\":\"0.2\"}"
+                                                                  },
+                                                   "maxEvents":  {
+                                                                     "title":  "Max events per run",
+                                                                     "subtitle":  "Process in batches to avoid timeouts."
+                                                                 },
+                                                   "dryRun":  {
+                                                                  "title":  "Dry run",
+                                                                  "subtitle":  "Counts without writing to the database.",
+                                                                  "label":  "Dry run mode"
+                                                              },
+                                                   "result":  {
+                                                                  "processed":  "Processed {count}",
+                                                                  "created":  "Created {count}",
+                                                                  "skipped":  "Skipped {count}",
+                                                                  "failed":  "Failed {count}"
+                                                              },
+                                                   "actions":  {
+                                                                   "run":  "Run re-embed"
+                                                               }
+                                               }
+                               }
+              }
+}
